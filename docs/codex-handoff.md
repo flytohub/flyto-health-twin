@@ -27,3 +27,17 @@ The public dashboard is in `web/` and uses React Vite. It reads
 4. Add the weighted trend model behind the `Model` interface.
 5. Add model-version metadata to every persisted prediction output.
 6. Keep future device adapters behind the privacy filter.
+
+## Current Roadmap Commands
+
+```bash
+go run ./cmd/flyto2 registry adapters
+go run ./cmd/flyto2 registry models
+go run ./cmd/flyto2 registry datasets
+go run ./cmd/flyto2 registry workflows
+go run ./cmd/flyto2 generate synthetic -profile balanced -days 30
+go run ./cmd/flyto2 report model -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 benchmark run -profile balanced -days 30
+go run ./cmd/flyto2 equipment gate
+go run ./cmd/flyto2 simulate telomere -divisions 24
+```

@@ -71,3 +71,18 @@ The public export is the dashboard-safe contract. It includes daily aggregates,
 prediction history, error summary, model metadata, and missing-variable hints.
 It does not include notes, raw GPS, exact sleep timeline, full medical reports,
 device credentials, or raw time series.
+
+Additional public-safe status fields:
+
+| Field | Meaning |
+| --- | --- |
+| `roadmap_status.adapter_contract_count` | Number of adapter contracts tracked in the private/open-core registry |
+| `roadmap_status.model_card_count` | Number of model cards tracked |
+| `roadmap_status.dataset_candidate_count` | Number of dataset tracks recorded |
+| `roadmap_status.workflow_recipe_count` | Number of Flyto-native workflow recipes |
+| `roadmap_status.equipment_gates` | Source ids and gate status only; no raw field mappings |
+| `roadmap_status.simulation_boundary` | Safe simulation boundary statement |
+| `benchmark` | Synthetic model regression summary for dashboard transparency |
+
+Raw adapter contract fields stay in CLI registry output and docs, not in the
+public dashboard export.

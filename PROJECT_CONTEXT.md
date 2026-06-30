@@ -129,6 +129,8 @@ synthetic_daily.csv
   -> print prediction errors and missing-variable hints
   -> export redacted JSON
   -> render React Vite public dashboard
+  -> run registries, benchmarks, workflow recipes, equipment gates, and toy
+     simulations from CLI
 ```
 
 ## Roadmap Documents
@@ -143,3 +145,17 @@ synthetic_daily.csv
 - `docs/collaboration-plan.md` — how to approach researchers and device teams.
 - `docs/deployment.md` — free static hosting options for the React Vite
   dashboard.
+
+## Implemented Roadmap Artifacts
+
+- Adapter registry: `go run ./cmd/flyto2 registry adapters`
+- Model registry: `go run ./cmd/flyto2 registry models`
+- Dataset registry: `go run ./cmd/flyto2 registry datasets`
+- Synthetic profiles: `go run ./cmd/flyto2 registry synthetic`
+- Benchmark fixtures: `go run ./cmd/flyto2 registry benchmarks`
+- Synthetic generator: `go run ./cmd/flyto2 generate synthetic -profile balanced`
+- Model report: `go run ./cmd/flyto2 report model`
+- Benchmark report: `go run ./cmd/flyto2 benchmark run`
+- Real-equipment gate: `go run ./cmd/flyto2 equipment gate`
+- Flyto-native workflow recipes: `go run ./cmd/flyto2 workflow recipes`
+- Safe telomere toy simulation: `go run ./cmd/flyto2 simulate telomere`

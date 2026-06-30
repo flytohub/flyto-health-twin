@@ -49,12 +49,38 @@ type ErrorSummary = {
   sleep_mean_absolute_error: number;
 };
 
+type PublicEquipmentGateStatus = {
+  source_id: string;
+  status: string;
+};
+
+type PublicRoadmapStatus = {
+  adapter_contract_count: number;
+  model_card_count: number;
+  dataset_candidate_count: number;
+  workflow_recipe_count: number;
+  equipment_gates: PublicEquipmentGateStatus[];
+  simulation_boundary: string;
+};
+
+type ModelEvaluationReport = {
+  dataset_id: string;
+  model_id: string;
+  model_version: string;
+  record_count: number;
+  evaluation_count: number;
+  error_summary: ErrorSummary;
+  pass: boolean;
+};
+
 type PublicExport = {
   project: string;
   generated_at: string;
   records: PublicRecord[];
   evaluations: PublicEvaluation[];
   error_summary: ErrorSummary;
+  roadmap_status: PublicRoadmapStatus;
+  benchmark: ModelEvaluationReport;
 };
 
 type SeriesPoint = {
@@ -110,6 +136,9 @@ function Dashboard({ data }: { data: PublicExport }) {
   const latestEvaluation = data.evaluations.at(-1);
   const latestRecord = data.records.at(-1);
   const model = latestEvaluation?.prediction;
+  const blockedGateCount = data.roadmap_status.equipment_gates.filter((gate) =>
+    gate.status.startsWith("blocked"),
+  ).length;
 
   const hrvSeries = useMemo(
     () =>
@@ -265,10 +294,30 @@ function Dashboard({ data }: { data: PublicExport }) {
       <section className="roadmap-band">
         <PanelHeader title="Open roadmap" meta="equipment-ready foundation" />
         <div className="roadmap-grid">
-          <RoadmapItem title="Public dashboard" detail="React Vite view over redacted JSON exports." />
-          <RoadmapItem title="Adapter registry" detail="Apple Health, Oura, Garmin, Fitbit, and CSV contracts." />
-          <RoadmapItem title="Model registry" detail="Versioned predictions, assumptions, and comparable error reports." />
-          <RoadmapItem title="Research simulations" detail="Biology topics stay as safe toy models until real approvals exist." />
+          <RoadmapItem
+            title="Public dashboard"
+            detail={`React Vite view over ${data.records.length} redacted daily aggregates.`}
+          />
+          <RoadmapItem
+            title="Adapter registry"
+            detail={`${data.roadmap_status.adapter_contract_count} contracts tracked; ${blockedGateCount} real-equipment paths remain gated.`}
+          />
+          <RoadmapItem
+            title="Model registry"
+            detail={`${data.roadmap_status.model_card_count} model cards; benchmark ${data.benchmark.pass ? "passing" : "needs review"} on ${data.benchmark.evaluation_count} evaluations.`}
+          />
+          <RoadmapItem
+            title="Flyto workflows"
+            detail={`${data.roadmap_status.workflow_recipe_count} Flyto-native recipes for export, benchmark, and equipment gate checks.`}
+          />
+          <RoadmapItem
+            title="Research simulations"
+            detail={data.roadmap_status.simulation_boundary}
+          />
+          <RoadmapItem
+            title="Dataset registry"
+            detail={`${data.roadmap_status.dataset_candidate_count} dataset tracks recorded; public data remains synthetic or aggregated.`}
+          />
         </div>
       </section>
     </main>

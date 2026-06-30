@@ -7,11 +7,27 @@ import (
 )
 
 type PublicExport struct {
-	Project      string             `json:"project"`
-	GeneratedAt  string             `json:"generated_at"`
-	Records      []PublicRecordJSON `json:"records"`
-	Evaluations  []PublicEvaluation `json:"evaluations"`
-	ErrorSummary ErrorSummary       `json:"error_summary"`
+	Project       string                `json:"project"`
+	GeneratedAt   string                `json:"generated_at"`
+	Records       []PublicRecordJSON    `json:"records"`
+	Evaluations   []PublicEvaluation    `json:"evaluations"`
+	ErrorSummary  ErrorSummary          `json:"error_summary"`
+	RoadmapStatus PublicRoadmapStatus   `json:"roadmap_status"`
+	Benchmark     ModelEvaluationReport `json:"benchmark"`
+}
+
+type PublicRoadmapStatus struct {
+	AdapterContractCount  int                         `json:"adapter_contract_count"`
+	ModelCardCount        int                         `json:"model_card_count"`
+	DatasetCandidateCount int                         `json:"dataset_candidate_count"`
+	WorkflowRecipeCount   int                         `json:"workflow_recipe_count"`
+	EquipmentGates        []PublicEquipmentGateStatus `json:"equipment_gates"`
+	SimulationBoundary    string                      `json:"simulation_boundary"`
+}
+
+type PublicEquipmentGateStatus struct {
+	SourceID string `json:"source_id"`
+	Status   string `json:"status"`
 }
 
 type PublicRecordJSON struct {
@@ -80,18 +96,47 @@ func BuildPublicExportAt(records []DailyRecord, evals []Evaluation, generatedAt 
 	}
 
 	hrv, rhr, fatigue, sleep := MeanAbsoluteErrors(evals)
-	return PublicExport{
-		Project:     "flyto2",
-		GeneratedAt: generatedAt.UTC().Format(time.RFC3339),
-		Records:     publicRecords,
-		Evaluations: publicEvals,
-		ErrorSummary: ErrorSummary{
-			HRVMeanAbsoluteError:     hrv,
-			RHRMeanAbsoluteError:     rhr,
-			FatigueMeanAbsoluteError: fatigue,
-			SleepMeanAbsoluteError:   sleep,
-		},
+	errorSummary := ErrorSummary{
+		HRVMeanAbsoluteError:     hrv,
+		RHRMeanAbsoluteError:     rhr,
+		FatigueMeanAbsoluteError: fatigue,
+		SleepMeanAbsoluteError:   sleep,
 	}
+	baseline := BaselineModel{}
+	return PublicExport{
+		Project:      "flyto2",
+		GeneratedAt:  generatedAt.UTC().Format(time.RFC3339),
+		Records:      publicRecords,
+		Evaluations:  publicEvals,
+		ErrorSummary: errorSummary,
+		RoadmapStatus: PublicRoadmapStatus{
+			AdapterContractCount:  len(AdapterContracts()),
+			ModelCardCount:        len(ModelRegistry()),
+			DatasetCandidateCount: len(DatasetRegistry()),
+			WorkflowRecipeCount:   len(WorkflowRecipes()),
+			EquipmentGates:        publicEquipmentGateStatuses(),
+			SimulationBoundary:    "safe educational toy simulations only; not personal biology or medical guidance",
+		},
+		Benchmark: BuildModelEvaluationReportFromEvaluations(
+			"synthetic_daily_v0",
+			baseline.ID(),
+			baseline.Version(),
+			len(records),
+			evals,
+		),
+	}
+}
+
+func publicEquipmentGateStatuses() []PublicEquipmentGateStatus {
+	reports := CheckAllEquipmentGates()
+	statuses := make([]PublicEquipmentGateStatus, 0, len(reports))
+	for _, report := range reports {
+		statuses = append(statuses, PublicEquipmentGateStatus{
+			SourceID: report.SourceID,
+			Status:   report.Status,
+		})
+	}
+	return statuses
 }
 
 func WritePublicExport(w io.Writer, records []DailyRecord, evals []Evaluation) error {

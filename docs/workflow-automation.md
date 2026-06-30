@@ -38,6 +38,22 @@ Third-party automation tools can be optional bridges later, but they are not the
 default architecture and must not be required to run the open-source project.
 Agents may generate workflow drafts, but high-risk actions need human review.
 
+## Implemented Recipes
+
+Workflow recipes are exposed as JSON so `flyto-core` or `flyto-cloud` can
+consume them later without requiring another automation platform:
+
+```bash
+go run ./cmd/flyto2 workflow recipes
+go run ./cmd/flyto2 registry workflows
+```
+
+Current recipes:
+
+- Daily public export refresh
+- Benchmark regression report
+- Equipment adapter gate review
+
 ## Hard Boundary
 
 Automation must not:

@@ -46,3 +46,15 @@ Before adding a real adapter:
 4. Add privacy checker coverage.
 5. Add importer tests.
 6. Prove `export public` omits raw/private data.
+
+This gate is implemented in the CLI:
+
+```bash
+go run ./cmd/flyto2 equipment gate
+go run ./cmd/flyto2 equipment gate -source wearable_daily_aggregate
+```
+
+`manual_csv` is ready for synthetic public demos. Real device contracts remain
+`blocked_until_real_equipment_evidence` until the required sample exports,
+privacy mapping, fixture coverage, importer tests, and public redaction proof
+exist.

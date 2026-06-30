@@ -30,3 +30,21 @@ When a dataset is added later, record:
 
 Do not mix external cohort findings into personal predictions without labeling
 them as population-level priors.
+
+## Implemented Fixtures
+
+The first public fixture is deterministic and synthetic:
+
+```bash
+make fixtures
+go run ./cmd/flyto2 benchmark run -profile balanced -days 30
+```
+
+Committed fixture:
+
+```text
+examples/benchmark_balanced.csv
+```
+
+The benchmark report is a software regression guardrail only. It is not a
+clinical accuracy claim and does not represent a population.

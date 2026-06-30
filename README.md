@@ -18,6 +18,10 @@ interventions.
 - Privacy-first public data rules
 - Go CLI
 - React Vite public dashboard
+- Synthetic data generator and benchmark fixture
+- Adapter, model, dataset, and workflow registries
+- Real-equipment integration gate
+- Safety-scoped biology toy simulation
 
 ## Installation
 
@@ -64,6 +68,15 @@ go run ./cmd/flyto2 predict -data examples/synthetic_daily.csv
 go run ./cmd/flyto2 evaluate -data examples/synthetic_daily.csv -limit 5
 go run ./cmd/flyto2 export public -data examples/synthetic_daily.csv -out -
 go run ./cmd/flyto2 privacy check -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 generate synthetic -profile balanced -days 30 -out examples/benchmark_balanced.csv
+go run ./cmd/flyto2 registry adapters
+go run ./cmd/flyto2 registry models
+go run ./cmd/flyto2 registry datasets
+go run ./cmd/flyto2 registry workflows
+go run ./cmd/flyto2 report model -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 benchmark run -profile balanced -days 30
+go run ./cmd/flyto2 equipment gate
+go run ./cmd/flyto2 simulate telomere -divisions 24
 ```
 
 ## Web Dashboard
@@ -124,6 +137,25 @@ more complex model is added.
 
 For public dashboards, use `export public`; it strips private notes and omits
 raw/private fields by design.
+
+## Roadmap Closure Artifacts
+
+The repo includes runnable artifacts for the non-device parts of the long-term
+plan:
+
+- `examples/benchmark_balanced.csv` is a deterministic synthetic benchmark
+  fixture.
+- `registry adapters` records implemented and future adapter contracts.
+- `registry models` records implemented, planned, and equipment-gated model
+  cards.
+- `benchmark run` produces a model regression report with non-clinical pass
+  thresholds.
+- `equipment gate` blocks real-device adapters until sample exports, privacy
+  mapping, fixtures, importer tests, and redaction proof exist.
+- `workflow recipes` describes Flyto-native automation using `flyto-core` and
+  optional `flyto-cloud` orchestration.
+- `simulate telomere` is an educational toy simulation only, separate from
+  personal wearable predictions.
 
 ## Contributing
 

@@ -43,6 +43,13 @@ Outputs:
 - Tomorrow sleep score
 - Recovery state
 
+Implemented now:
+
+```bash
+go run ./cmd/flyto2 evaluate -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 report model -data examples/synthetic_daily.csv
+```
+
 ## Phase 2: Public Experiment Log
 
 Create dashboard-safe exports:
@@ -57,6 +64,13 @@ Create dashboard-safe exports:
 Do not publish raw health exports, GPS, exact sleep timelines, device tokens,
 full medical reports, diagnosis history, or identifying notes.
 
+Implemented now:
+
+```bash
+go run ./cmd/flyto2 export public -data examples/synthetic_daily.csv -out -
+make web-dev
+```
+
 ## Phase 3: Model Calibration
 
 Add models without changing the data contract:
@@ -69,6 +83,13 @@ Add models without changing the data contract:
 
 The project measures quality by prediction error and reproducibility, not by
 claiming a human-similarity percentage.
+
+Implemented now:
+
+```bash
+go run ./cmd/flyto2 registry models
+go run ./cmd/flyto2 benchmark run -profile balanced -days 30
+```
 
 ## Phase 4: Equipment Readiness
 
@@ -83,6 +104,13 @@ When equipment exists, connect through adapters:
 
 Each adapter must define source id, capabilities, sync mode, privacy risk, raw
 fields, aggregate fields, and public-export eligibility.
+
+Implemented now:
+
+```bash
+go run ./cmd/flyto2 registry adapters
+go run ./cmd/flyto2 equipment gate
+```
 
 ## Phase 5: Research Collaboration
 
@@ -115,6 +143,12 @@ Keep biology topics separate from the wearable model:
 These modules can teach concepts and track public research, but they must not
 claim real intervention, clinical safety, or human-body accuracy.
 
+Implemented now:
+
+```bash
+go run ./cmd/flyto2 simulate telomere -divisions 24
+```
+
 ## Phase 7: Flyto-Native Automation
 
 Use Flyto automation around privacy-safe outputs:
@@ -131,3 +165,9 @@ automation checks. `flyto-cloud` should be the hosted orchestration layer when
 scheduling, permissions, collaboration, or public sharing are needed.
 
 Automation must not move raw private data into public artifacts.
+
+Implemented now:
+
+```bash
+go run ./cmd/flyto2 workflow recipes
+```

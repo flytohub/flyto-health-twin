@@ -32,3 +32,15 @@ body.
 The current codebase should implement level 3 first. Levels 1 and 2 may be
 added as separate educational packages later. Levels 4 and 5 wait for hardware
 or collaborators.
+
+## Implemented Toy Simulation
+
+Level 1 now exists as an explicitly non-medical toy model:
+
+```bash
+go run ./cmd/flyto2 simulate telomere -divisions 24
+```
+
+The output includes safety boundaries and not-allowed interpretations. It must
+not be used to infer a user's telomere length, diagnose biology, recommend an
+intervention, or claim anti-aging effects.

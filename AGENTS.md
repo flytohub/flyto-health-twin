@@ -58,6 +58,9 @@ go test ./...
 go run ./cmd/flyto2 demo
 go run ./cmd/flyto2 export public -data examples/synthetic_daily.csv -out -
 go run ./cmd/flyto2 privacy check -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 benchmark run -profile balanced -days 30
+go run ./cmd/flyto2 equipment gate
+go run ./cmd/flyto2 workflow recipes
 make web-dev
 make web-build
 ```

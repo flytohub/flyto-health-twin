@@ -761,5 +761,62 @@
     "rhr_mean_absolute_error": 3.8560000000000008,
     "fatigue_mean_absolute_error": 2.1529999999999996,
     "sleep_mean_absolute_error": 13.89333333333334
+  },
+  "roadmap_status": {
+    "adapter_contract_count": 4,
+    "model_card_count": 3,
+    "dataset_candidate_count": 3,
+    "workflow_recipe_count": 3,
+    "equipment_gates": [
+      {
+        "source_id": "manual_csv",
+        "status": "ready_for_synthetic_public_demo"
+      },
+      {
+        "source_id": "wearable_daily_aggregate",
+        "status": "blocked_until_real_equipment_evidence"
+      },
+      {
+        "source_id": "blood_pressure_monitor",
+        "status": "blocked_until_real_equipment_evidence"
+      },
+      {
+        "source_id": "lab_snapshot",
+        "status": "blocked_until_real_equipment_evidence"
+      }
+    ],
+    "simulation_boundary": "safe educational toy simulations only; not personal biology or medical guidance"
+  },
+  "benchmark": {
+    "dataset_id": "synthetic_daily_v0",
+    "model_id": "baseline_strain",
+    "model_version": "0.1.0",
+    "record_count": 12,
+    "evaluation_count": 10,
+    "error_summary": {
+      "hrv_mean_absolute_error": 6.004666666666667,
+      "rhr_mean_absolute_error": 3.8560000000000008,
+      "fatigue_mean_absolute_error": 2.1529999999999996,
+      "sleep_mean_absolute_error": 13.89333333333334
+    },
+    "pass_thresholds": {
+      "hrv_mean_absolute_error": 9,
+      "rhr_mean_absolute_error": 6,
+      "fatigue_mean_absolute_error": 2.5,
+      "sleep_mean_absolute_error": 18
+    },
+    "pass": true,
+    "recovery_state_counts": {
+      "normal": 5,
+      "recovered": 2,
+      "strained": 3
+    },
+    "missing_variable_counts": {
+      "no obvious missing variable from current schema": 10
+    },
+    "caveats": [
+      "benchmark uses synthetic daily aggregates only",
+      "pass/fail is for regression guardrails, not clinical accuracy"
+    ]
   }
 }
