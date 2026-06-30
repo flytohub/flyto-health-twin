@@ -138,7 +138,8 @@ synthetic_daily.csv
   human topics as safe simulation/research tracks.
 - `docs/equipment-readiness.md` — future device and lab adapter boundary.
 - `docs/public-dataset-registry.md` — public data sources to use later.
-- `docs/workflow-automation.md` — n8n/Flyto workflow automation boundary.
+- `docs/workflow-automation.md` — Flyto Core/Cloud workflow automation
+  boundary.
 - `docs/collaboration-plan.md` — how to approach researchers and device teams.
 - `docs/deployment.md` — free static hosting options for the React Vite
   dashboard.

@@ -39,7 +39,9 @@ runtime.
 Flyto resources may be used around the project:
 
 - `flyto-indexer` for code review, secret scan, and architecture checks.
-- `flyto-core` for optional workflow verification demos.
+- `flyto-core` for local workflow/module execution and verification demos.
+- `flyto-cloud` for optional hosted scheduling, collaboration, and public
+  orchestration after privacy-safe exports exist.
 - Existing Flyto docs and gates as engineering patterns.
 
 The open-source project must remain usable by someone who only clones this

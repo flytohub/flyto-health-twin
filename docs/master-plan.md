@@ -115,9 +115,9 @@ Keep biology topics separate from the wearable model:
 These modules can teach concepts and track public research, but they must not
 claim real intervention, clinical safety, or human-body accuracy.
 
-## Phase 7: Automation
+## Phase 7: Flyto-Native Automation
 
-Use n8n, Flyto workflows, or GitHub Actions only around privacy-safe outputs:
+Use Flyto automation around privacy-safe outputs:
 
 - Daily import check
 - Prediction run
@@ -125,5 +125,9 @@ Use n8n, Flyto workflows, or GitHub Actions only around privacy-safe outputs:
 - Error report
 - Collaboration packet generation
 - Device adapter smoke test
+
+`flyto-core` should be the local workflow/module runtime for reproducible
+automation checks. `flyto-cloud` should be the hosted orchestration layer when
+scheduling, permissions, collaboration, or public sharing are needed.
 
 Automation must not move raw private data into public artifacts.

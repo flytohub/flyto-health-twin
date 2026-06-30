@@ -1,4 +1,4 @@
-# Workflow Automation
+# Flyto-Native Workflow Automation
 
 Automation should help run the research loop. It must not bypass privacy
 boundaries.
@@ -14,9 +14,16 @@ boundaries.
 - Collaboration packet generation
 - Device adapter smoke test
 
-## n8n / Agent Direction
+## Flyto Runtime Direction
 
-n8n, Flyto workflows, or other agents can act as workflow runtimes:
+Flyto2 should use the existing Flyto stack as its native automation path:
+
+- `flyto-core` for local workflow execution, module checks, browser/YAML
+  verification, and reproducible smoke tests.
+- `flyto-cloud` for hosted scheduling, workspace permissions, collaboration,
+  auditability, and public dashboard orchestration when a hosted layer is
+  needed.
+- GitHub Actions for open-source CI checks only.
 
 ```text
 daily aggregate file
@@ -27,6 +34,8 @@ daily aggregate file
   -> report
 ```
 
+Third-party automation tools can be optional bridges later, but they are not the
+default architecture and must not be required to run the open-source project.
 Agents may generate workflow drafts, but high-risk actions need human review.
 
 ## Hard Boundary
