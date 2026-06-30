@@ -2,7 +2,7 @@
 
 ## Summary
 
-Flyto Health Twin is an open-source personal health digital twin prototype.
+Flyto2 is an open-source personal health digital twin prototype.
 The project uses wearable data, lifestyle logs, and optional periodic health
 metrics to build a low-cost personal physiological response model.
 
@@ -104,6 +104,7 @@ Open-source:
 - Baseline prediction engine
 - Error analysis
 - CLI and local dashboard
+- React Vite public dashboard
 - Documentation
 
 Private or optional commercial layer:
@@ -126,6 +127,8 @@ synthetic_daily.csv
   -> predict next day
   -> compare with actuals
   -> print prediction errors and missing-variable hints
+  -> export redacted JSON
+  -> render React Vite public dashboard
 ```
 
 ## Roadmap Documents
@@ -137,3 +140,5 @@ synthetic_daily.csv
 - `docs/public-dataset-registry.md` — public data sources to use later.
 - `docs/workflow-automation.md` — n8n/Flyto workflow automation boundary.
 - `docs/collaboration-plan.md` — how to approach researchers and device teams.
+- `docs/deployment.md` — free static hosting options for the React Vite
+  dashboard.

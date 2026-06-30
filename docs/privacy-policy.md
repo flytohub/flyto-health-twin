@@ -44,8 +44,8 @@ Before making data public:
 Use:
 
 ```bash
-go run ./cmd/healthtwin privacy check -data examples/synthetic_daily.csv
-go run ./cmd/healthtwin export public -data examples/synthetic_daily.csv -out public.json
+go run ./cmd/flyto2 privacy check -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 export public -data examples/synthetic_daily.csv -out public.json
 ```
 
 The privacy checker blocks obvious raw/private headers such as GPS,

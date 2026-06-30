@@ -1,6 +1,6 @@
 # Contributing
 
-Flyto Health Twin welcomes small, reviewable contributions that keep the project
+Flyto2 welcomes small, reviewable contributions that keep the project
 privacy-first and non-medical.
 
 ## Before You Change Code

@@ -1,6 +1,6 @@
-# Flyto Health Twin
+# Flyto2
 
-Flyto Health Twin is an open-source personal health digital twin prototype.
+Flyto2 is an open-source personal health digital twin prototype.
 It imports or simulates daily wearable and lifestyle data, predicts next-day
 physiological response metrics, compares predictions with actual outcomes, and
 reports error analysis.
@@ -17,22 +17,25 @@ interventions.
 - Error analysis
 - Privacy-first public data rules
 - Go CLI
+- React Vite public dashboard
 
 ## Installation
 
-Install Go 1.22 or newer, then clone the repository.
+Install Go 1.22 or newer and Node 24 or newer, then clone the repository.
 
 ```bash
 git clone https://github.com/flytohub/flyto-health-twin.git
 cd flyto-health-twin
 go test ./...
+npm install --prefix web
 ```
 
 ## Quick Start
 
 ```bash
 make verify
-go run ./cmd/healthtwin demo
+go run ./cmd/flyto2 demo
+make web-dev
 ```
 
 Example output:
@@ -45,22 +48,46 @@ date        hrv_pred hrv_actual hrv_err rhr_pred rhr_actual fatigue_pred fatigue
 ## Repository Layout
 
 ```text
-cmd/healthtwin/        CLI entrypoint
+cmd/flyto2/        CLI entrypoint
 internal/twin/         Data model, CSV import, prediction, evaluation
 examples/              Synthetic demo data only
 docs/                  Research, privacy, and data model docs
+web/                   React Vite public dashboard
 ```
 
 ## CLI
 
 ```bash
-go run ./cmd/healthtwin demo
-go run ./cmd/healthtwin import csv -data examples/synthetic_daily.csv
-go run ./cmd/healthtwin predict -data examples/synthetic_daily.csv
-go run ./cmd/healthtwin evaluate -data examples/synthetic_daily.csv -limit 5
-go run ./cmd/healthtwin export public -data examples/synthetic_daily.csv -out -
-go run ./cmd/healthtwin privacy check -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 demo
+go run ./cmd/flyto2 import csv -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 predict -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 evaluate -data examples/synthetic_daily.csv -limit 5
+go run ./cmd/flyto2 export public -data examples/synthetic_daily.csv -out -
+go run ./cmd/flyto2 privacy check -data examples/synthetic_daily.csv
 ```
+
+## Web Dashboard
+
+The public dashboard is a React Vite app. It reads only
+`web/public/public-data.json`, which is generated from the privacy-safe public
+export.
+
+The public logo asset is stored at `web/public/brand/flyto-logo.png`.
+
+```bash
+make web-install
+make web-data
+make web-dev
+```
+
+For production:
+
+```bash
+make web-build
+```
+
+Deploy `web/dist` to Cloudflare Pages, Netlify, Vercel, or GitHub Pages. See
+`docs/deployment.md`.
 
 ## Public Data Rule
 
@@ -73,7 +100,8 @@ device credentials, or identifiable health history.
 ```bash
 make verify
 go test ./...
-go run ./cmd/healthtwin -data examples/synthetic_daily.csv -limit 7
+go run ./cmd/flyto2 -data examples/synthetic_daily.csv -limit 7
+npm --prefix web run build
 ```
 
 ## Usage
@@ -81,13 +109,13 @@ go run ./cmd/healthtwin -data examples/synthetic_daily.csv -limit 7
 The CLI expects one CSV row per day. Start with the synthetic sample:
 
 ```bash
-go run ./cmd/healthtwin evaluate -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 evaluate -data examples/synthetic_daily.csv
 ```
 
 Use `-limit` to print fewer rows:
 
 ```bash
-go run ./cmd/healthtwin evaluate -data examples/synthetic_daily.csv -limit 3
+go run ./cmd/flyto2 evaluate -data examples/synthetic_daily.csv -limit 3
 ```
 
 The current baseline model uses recent daily aggregates and simple strain

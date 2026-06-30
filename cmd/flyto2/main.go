@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/flytohub/flyto-health-twin/internal/twin"
 )
@@ -81,6 +82,7 @@ func runExport(args []string) {
 	fs := flag.NewFlagSet("export public", flag.ExitOnError)
 	dataPath := fs.String("data", "examples/synthetic_daily.csv", "CSV file with daily aggregate records")
 	outPath := fs.String("out", "-", "output JSON path; '-' writes stdout")
+	generatedAt := fs.String("generated-at", "", "optional RFC3339 timestamp for reproducible public exports")
 	_ = fs.Parse(args[1:])
 
 	records := mustLoadRecords(*dataPath)
@@ -88,9 +90,16 @@ func runExport(args []string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	exportedAt := time.Now().UTC()
+	if *generatedAt != "" {
+		exportedAt, err = time.Parse(time.RFC3339, *generatedAt)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 
 	if *outPath == "-" {
-		if err := twin.WritePublicExport(os.Stdout, records, evals); err != nil {
+		if err := twin.WritePublicExportAt(os.Stdout, records, evals, exportedAt); err != nil {
 			log.Fatal(err)
 		}
 		return
@@ -101,7 +110,7 @@ func runExport(args []string) {
 		log.Fatal(err)
 	}
 	defer f.Close()
-	if err := twin.WritePublicExport(f, records, evals); err != nil {
+	if err := twin.WritePublicExportAt(f, records, evals, exportedAt); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -206,17 +215,17 @@ func printUsage() {
 }
 
 func usageText() string {
-	return `Flyto Health Twin
+	return `Flyto2
 
 Usage:
-  healthtwin demo [-limit N]
-  healthtwin evaluate [-data path] [-limit N]
-  healthtwin predict [-data path]
-  healthtwin export public [-data path] [-out path|-]
-  healthtwin import csv [-data path]
-  healthtwin privacy check [-data path]
+  flyto2 demo [-limit N]
+  flyto2 evaluate [-data path] [-limit N]
+  flyto2 predict [-data path]
+  flyto2 export public [-data path] [-out path|-] [-generated-at RFC3339]
+  flyto2 import csv [-data path]
+  flyto2 privacy check [-data path]
 
 Default:
-  healthtwin -data examples/synthetic_daily.csv
+  flyto2 -data examples/synthetic_daily.csv
 `
 }

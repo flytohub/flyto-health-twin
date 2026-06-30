@@ -1,0 +1,6 @@
+{
+  "installCommand": "npm ci --prefix web",
+  "buildCommand": "make web-data && npm --prefix web run build",
+  "outputDirectory": "web/dist",
+  "framework": "vite"
+}

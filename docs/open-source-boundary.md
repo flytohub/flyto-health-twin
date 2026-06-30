@@ -12,6 +12,7 @@ The public repository should contain:
 - Baseline prediction models
 - Error analysis
 - CLI
+- React Vite public dashboard
 - Local-only examples
 - Documentation
 

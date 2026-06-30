@@ -5,6 +5,10 @@
 
 bin/
 dist/
+node_modules/
+web/dist/
+web/node_modules/
+*.tsbuildinfo
 coverage.out
 .flyto-index/
 

@@ -1,0 +1,765 @@
+{
+  "project": "flyto2",
+  "generated_at": "2026-06-30T00:00:00Z",
+  "records": [
+    {
+      "date": "2026-06-01",
+      "source_id": "synthetic_manual",
+      "sleep_score": 78,
+      "sleep_hours": 7.4,
+      "hrv": 52,
+      "resting_heart_rate": 61,
+      "steps": 8200,
+      "exercise_minutes": 35,
+      "stress_score": 4,
+      "fatigue_score": 3,
+      "caffeine_servings": 2,
+      "water_liters": 2.4
+    },
+    {
+      "date": "2026-06-02",
+      "source_id": "synthetic_manual",
+      "sleep_score": 74,
+      "sleep_hours": 6.8,
+      "hrv": 50,
+      "resting_heart_rate": 62,
+      "steps": 9100,
+      "exercise_minutes": 45,
+      "stress_score": 5,
+      "fatigue_score": 4,
+      "caffeine_servings": 2,
+      "water_liters": 2.1
+    },
+    {
+      "date": "2026-06-03",
+      "source_id": "synthetic_manual",
+      "sleep_score": 61,
+      "sleep_hours": 5.9,
+      "hrv": 47,
+      "resting_heart_rate": 64,
+      "steps": 11200,
+      "exercise_minutes": 70,
+      "stress_score": 7,
+      "fatigue_score": 5,
+      "caffeine_servings": 3,
+      "water_liters": 1.9
+    },
+    {
+      "date": "2026-06-04",
+      "source_id": "synthetic_manual",
+      "sleep_score": 68,
+      "sleep_hours": 6.4,
+      "hrv": 48,
+      "resting_heart_rate": 63,
+      "steps": 7600,
+      "exercise_minutes": 20,
+      "stress_score": 6,
+      "fatigue_score": 5,
+      "caffeine_servings": 2,
+      "water_liters": 2
+    },
+    {
+      "date": "2026-06-05",
+      "source_id": "synthetic_manual",
+      "sleep_score": 82,
+      "sleep_hours": 7.8,
+      "hrv": 54,
+      "resting_heart_rate": 60,
+      "steps": 6400,
+      "exercise_minutes": 15,
+      "stress_score": 3,
+      "fatigue_score": 2,
+      "caffeine_servings": 1,
+      "water_liters": 2.6
+    },
+    {
+      "date": "2026-06-06",
+      "source_id": "synthetic_manual",
+      "sleep_score": 80,
+      "sleep_hours": 7.6,
+      "hrv": 55,
+      "resting_heart_rate": 59,
+      "steps": 7000,
+      "exercise_minutes": 30,
+      "stress_score": 3,
+      "fatigue_score": 2,
+      "caffeine_servings": 1,
+      "water_liters": 2.5
+    },
+    {
+      "date": "2026-06-07",
+      "source_id": "synthetic_manual",
+      "sleep_score": 58,
+      "sleep_hours": 5.4,
+      "hrv": 45,
+      "resting_heart_rate": 66,
+      "steps": 13000,
+      "exercise_minutes": 85,
+      "stress_score": 8,
+      "fatigue_score": 6,
+      "caffeine_servings": 4,
+      "water_liters": 1.7
+    },
+    {
+      "date": "2026-06-08",
+      "source_id": "synthetic_manual",
+      "sleep_score": 64,
+      "sleep_hours": 6.1,
+      "hrv": 46,
+      "resting_heart_rate": 65,
+      "steps": 8600,
+      "exercise_minutes": 25,
+      "stress_score": 7,
+      "fatigue_score": 6,
+      "caffeine_servings": 3,
+      "water_liters": 1.8
+    },
+    {
+      "date": "2026-06-09",
+      "source_id": "synthetic_manual",
+      "sleep_score": 76,
+      "sleep_hours": 7,
+      "hrv": 51,
+      "resting_heart_rate": 62,
+      "steps": 7800,
+      "exercise_minutes": 30,
+      "stress_score": 4,
+      "fatigue_score": 3,
+      "caffeine_servings": 2,
+      "water_liters": 2.3
+    },
+    {
+      "date": "2026-06-10",
+      "source_id": "synthetic_manual",
+      "sleep_score": 84,
+      "sleep_hours": 8,
+      "hrv": 56,
+      "resting_heart_rate": 59,
+      "steps": 6900,
+      "exercise_minutes": 20,
+      "stress_score": 3,
+      "fatigue_score": 2,
+      "caffeine_servings": 1,
+      "water_liters": 2.7
+    },
+    {
+      "date": "2026-06-11",
+      "source_id": "synthetic_manual",
+      "sleep_score": 70,
+      "sleep_hours": 6.5,
+      "hrv": 50,
+      "resting_heart_rate": 63,
+      "steps": 10500,
+      "exercise_minutes": 60,
+      "stress_score": 5,
+      "fatigue_score": 4,
+      "caffeine_servings": 2,
+      "water_liters": 2
+    },
+    {
+      "date": "2026-06-12",
+      "source_id": "synthetic_manual",
+      "sleep_score": 66,
+      "sleep_hours": 6.2,
+      "hrv": 48,
+      "resting_heart_rate": 64,
+      "steps": 9800,
+      "exercise_minutes": 50,
+      "stress_score": 6,
+      "fatigue_score": 5,
+      "caffeine_servings": 3,
+      "water_liters": 1.9
+    }
+  ],
+  "evaluations": [
+    {
+      "target_date": "2026-06-03",
+      "prediction": {
+        "target_date": "2026-06-03",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-02",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 51,
+        "predicted_resting_heart_rate": 61.5,
+        "predicted_fatigue_score": 3.5,
+        "predicted_sleep_score": 76,
+        "recovery_state": "normal",
+        "hints": [
+          "baseline trend; no major strain marker in current inputs"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-03",
+        "source_id": "synthetic_manual",
+        "sleep_score": 61,
+        "sleep_hours": 5.9,
+        "hrv": 47,
+        "resting_heart_rate": 64,
+        "steps": 11200,
+        "exercise_minutes": 70,
+        "stress_score": 7,
+        "fatigue_score": 5,
+        "caffeine_servings": 3,
+        "water_liters": 1.9
+      },
+      "hrv_error": -4,
+      "rhr_error": 2.5,
+      "fatigue_error": 1.5,
+      "sleep_error": -15
+    },
+    {
+      "target_date": "2026-06-04",
+      "prediction": {
+        "target_date": "2026-06-04",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-03",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 39.766666666666666,
+        "predicted_resting_heart_rate": 68.63333333333334,
+        "predicted_fatigue_score": 7.1499999999999995,
+        "predicted_sleep_score": 53,
+        "recovery_state": "strained",
+        "hints": [
+          "short sleep may reduce next-day HRV",
+          "high stress may raise resting heart rate and fatigue",
+          "high exercise load may require more recovery time",
+          "high caffeine may affect sleep quality",
+          "low water intake may be a missing recovery variable",
+          "high training load may require more recovery time"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-04",
+        "source_id": "synthetic_manual",
+        "sleep_score": 68,
+        "sleep_hours": 6.4,
+        "hrv": 48,
+        "resting_heart_rate": 63,
+        "steps": 7600,
+        "exercise_minutes": 20,
+        "stress_score": 6,
+        "fatigue_score": 5,
+        "caffeine_servings": 2,
+        "water_liters": 2
+      },
+      "hrv_error": 8.233333333333334,
+      "rhr_error": -5.63333333333334,
+      "fatigue_error": -2.1499999999999995,
+      "sleep_error": 15
+    },
+    {
+      "target_date": "2026-06-05",
+      "prediction": {
+        "target_date": "2026-06-05",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-04",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 46.13333333333333,
+        "predicted_resting_heart_rate": 64.4,
+        "predicted_fatigue_score": 5.366666666666667,
+        "predicted_sleep_score": 63.66666666666667,
+        "recovery_state": "normal",
+        "hints": [
+          "short sleep may reduce next-day HRV"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-05",
+        "source_id": "synthetic_manual",
+        "sleep_score": 82,
+        "sleep_hours": 7.8,
+        "hrv": 54,
+        "resting_heart_rate": 60,
+        "steps": 6400,
+        "exercise_minutes": 15,
+        "stress_score": 3,
+        "fatigue_score": 2,
+        "caffeine_servings": 1,
+        "water_liters": 2.6
+      },
+      "hrv_error": 7.866666666666667,
+      "rhr_error": -4.400000000000006,
+      "fatigue_error": -3.366666666666667,
+      "sleep_error": 18.33333333333333
+    },
+    {
+      "target_date": "2026-06-06",
+      "prediction": {
+        "target_date": "2026-06-06",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-05",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 49.666666666666664,
+        "predicted_resting_heart_rate": 62.333333333333336,
+        "predicted_fatigue_score": 4,
+        "predicted_sleep_score": 70.33333333333333,
+        "recovery_state": "normal",
+        "hints": [
+          "baseline trend; no major strain marker in current inputs"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-06",
+        "source_id": "synthetic_manual",
+        "sleep_score": 80,
+        "sleep_hours": 7.6,
+        "hrv": 55,
+        "resting_heart_rate": 59,
+        "steps": 7000,
+        "exercise_minutes": 30,
+        "stress_score": 3,
+        "fatigue_score": 2,
+        "caffeine_servings": 1,
+        "water_liters": 2.5
+      },
+      "hrv_error": 5.333333333333336,
+      "rhr_error": -3.3333333333333357,
+      "fatigue_error": -2,
+      "sleep_error": 9.666666666666671
+    },
+    {
+      "target_date": "2026-06-07",
+      "prediction": {
+        "target_date": "2026-06-07",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-06",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 52.333333333333336,
+        "predicted_resting_heart_rate": 60.666666666666664,
+        "predicted_fatigue_score": 3,
+        "predicted_sleep_score": 76.66666666666667,
+        "recovery_state": "recovered",
+        "hints": [
+          "baseline trend; no major strain marker in current inputs"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-07",
+        "source_id": "synthetic_manual",
+        "sleep_score": 58,
+        "sleep_hours": 5.4,
+        "hrv": 45,
+        "resting_heart_rate": 66,
+        "steps": 13000,
+        "exercise_minutes": 85,
+        "stress_score": 8,
+        "fatigue_score": 6,
+        "caffeine_servings": 4,
+        "water_liters": 1.7
+      },
+      "hrv_error": -7.333333333333336,
+      "rhr_error": 5.333333333333336,
+      "fatigue_error": 3,
+      "sleep_error": -18.66666666666667
+    },
+    {
+      "target_date": "2026-06-08",
+      "prediction": {
+        "target_date": "2026-06-08",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-07",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 41.43333333333334,
+        "predicted_resting_heart_rate": 67.96666666666667,
+        "predicted_fatigue_score": 6.483333333333333,
+        "predicted_sleep_score": 55.33333333333333,
+        "recovery_state": "strained",
+        "hints": [
+          "short sleep may reduce next-day HRV",
+          "high stress may raise resting heart rate and fatigue",
+          "high exercise load may require more recovery time",
+          "high caffeine may affect sleep quality",
+          "low water intake may be a missing recovery variable",
+          "high training load may require more recovery time"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-08",
+        "source_id": "synthetic_manual",
+        "sleep_score": 64,
+        "sleep_hours": 6.1,
+        "hrv": 46,
+        "resting_heart_rate": 65,
+        "steps": 8600,
+        "exercise_minutes": 25,
+        "stress_score": 7,
+        "fatigue_score": 6,
+        "caffeine_servings": 3,
+        "water_liters": 1.8
+      },
+      "hrv_error": 4.566666666666663,
+      "rhr_error": -2.9666666666666686,
+      "fatigue_error": -0.4833333333333334,
+      "sleep_error": 8.666666666666671
+    },
+    {
+      "target_date": "2026-06-09",
+      "prediction": {
+        "target_date": "2026-06-09",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-08",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 42.28666666666666,
+        "predicted_resting_heart_rate": 67.39333333333333,
+        "predicted_fatigue_score": 6.696666666666667,
+        "predicted_sleep_score": 55.73333333333333,
+        "recovery_state": "strained",
+        "hints": [
+          "short sleep may reduce next-day HRV",
+          "high stress may raise resting heart rate and fatigue",
+          "high caffeine may affect sleep quality",
+          "low water intake may be a missing recovery variable"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-09",
+        "source_id": "synthetic_manual",
+        "sleep_score": 76,
+        "sleep_hours": 7,
+        "hrv": 51,
+        "resting_heart_rate": 62,
+        "steps": 7800,
+        "exercise_minutes": 30,
+        "stress_score": 4,
+        "fatigue_score": 3,
+        "caffeine_servings": 2,
+        "water_liters": 2.3
+      },
+      "hrv_error": 8.713333333333338,
+      "rhr_error": -5.393333333333331,
+      "fatigue_error": -3.696666666666667,
+      "sleep_error": 20.266666666666673
+    },
+    {
+      "target_date": "2026-06-10",
+      "prediction": {
+        "target_date": "2026-06-10",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-09",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 47.333333333333336,
+        "predicted_resting_heart_rate": 64.33333333333333,
+        "predicted_fatigue_score": 5,
+        "predicted_sleep_score": 66,
+        "recovery_state": "normal",
+        "hints": [
+          "baseline trend; no major strain marker in current inputs"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-10",
+        "source_id": "synthetic_manual",
+        "sleep_score": 84,
+        "sleep_hours": 8,
+        "hrv": 56,
+        "resting_heart_rate": 59,
+        "steps": 6900,
+        "exercise_minutes": 20,
+        "stress_score": 3,
+        "fatigue_score": 2,
+        "caffeine_servings": 1,
+        "water_liters": 2.7
+      },
+      "hrv_error": 8.666666666666664,
+      "rhr_error": -5.333333333333329,
+      "fatigue_error": -3,
+      "sleep_error": 18
+    },
+    {
+      "target_date": "2026-06-11",
+      "prediction": {
+        "target_date": "2026-06-11",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-10",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 51,
+        "predicted_resting_heart_rate": 62,
+        "predicted_fatigue_score": 3.6666666666666665,
+        "predicted_sleep_score": 74.66666666666667,
+        "recovery_state": "normal",
+        "hints": [
+          "baseline trend; no major strain marker in current inputs"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-11",
+        "source_id": "synthetic_manual",
+        "sleep_score": 70,
+        "sleep_hours": 6.5,
+        "hrv": 50,
+        "resting_heart_rate": 63,
+        "steps": 10500,
+        "exercise_minutes": 60,
+        "stress_score": 5,
+        "fatigue_score": 4,
+        "caffeine_servings": 2,
+        "water_liters": 2
+      },
+      "hrv_error": -1,
+      "rhr_error": 1,
+      "fatigue_error": 0.3333333333333335,
+      "sleep_error": -4.666666666666671
+    },
+    {
+      "target_date": "2026-06-12",
+      "prediction": {
+        "target_date": "2026-06-12",
+        "model_id": "baseline_strain",
+        "model_version": "0.1.0",
+        "input_start_date": "2026-06-01",
+        "input_end_date": "2026-06-11",
+        "feature_set": [
+          "sleep_score",
+          "sleep_hours",
+          "hrv",
+          "resting_heart_rate",
+          "exercise_minutes",
+          "stress_score",
+          "fatigue_score",
+          "caffeine_servings",
+          "water_liters",
+          "illness_score",
+          "training_load"
+        ],
+        "assumptions": [
+          "recent daily aggregates approximate short-term recovery trend",
+          "short sleep, high stress, high load, illness, and low hydration increase strain",
+          "model is a transparent baseline for error analysis, not clinical prediction"
+        ],
+        "predicted_hrv": 52.333333333333336,
+        "predicted_resting_heart_rate": 61.333333333333336,
+        "predicted_fatigue_score": 3,
+        "predicted_sleep_score": 76.66666666666667,
+        "recovery_state": "recovered",
+        "hints": [
+          "baseline trend; no major strain marker in current inputs"
+        ],
+        "missing_variables": [
+          "no obvious missing variable from current schema"
+        ]
+      },
+      "actual": {
+        "date": "2026-06-12",
+        "source_id": "synthetic_manual",
+        "sleep_score": 66,
+        "sleep_hours": 6.2,
+        "hrv": 48,
+        "resting_heart_rate": 64,
+        "steps": 9800,
+        "exercise_minutes": 50,
+        "stress_score": 6,
+        "fatigue_score": 5,
+        "caffeine_servings": 3,
+        "water_liters": 1.9
+      },
+      "hrv_error": -4.333333333333336,
+      "rhr_error": 2.6666666666666643,
+      "fatigue_error": 2,
+      "sleep_error": -10.666666666666671
+    }
+  ],
+  "error_summary": {
+    "hrv_mean_absolute_error": 6.004666666666667,
+    "rhr_mean_absolute_error": 3.8560000000000008,
+    "fatigue_mean_absolute_error": 2.1529999999999996,
+    "sleep_mean_absolute_error": 13.89333333333334
+  }
+}

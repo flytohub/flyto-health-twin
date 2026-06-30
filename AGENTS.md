@@ -1,7 +1,7 @@
 # Agent Instructions
 
-You are working on Flyto Health Twin, an open-source personal health digital
-twin prototype written in Go.
+You are working on Flyto2, an open-source personal health digital
+twin prototype with a Go core and React Vite public dashboard.
 
 ## Product Boundary
 
@@ -41,8 +41,10 @@ under ignored local folders such as `data/` or `exports/`.
   product or model changes.
 - Keep the open-source core independent from private Flyto services.
 - Prefer small Go packages with clear data contracts.
-- Keep the CLI useful before adding a web UI.
-- Use only standard-library dependencies until a dependency has a clear reason.
+- Keep the CLI useful and treat the web app as a public read-only dashboard.
+- Use only standard-library dependencies in the Go core until a dependency has a
+  clear reason. Keep web dependencies minimal and deployable as static Vite
+  output.
 - Add tests for prediction, aggregation, and privacy filters.
 - Keep documentation current when the model scope or data contract changes.
 - When working inside `/Users/chester/flytohub`, use `flyto-indexer` for
@@ -53,7 +55,9 @@ under ignored local folders such as `data/` or `exports/`.
 ```bash
 make verify
 go test ./...
-go run ./cmd/healthtwin demo
-go run ./cmd/healthtwin export public -data examples/synthetic_daily.csv -out -
-go run ./cmd/healthtwin privacy check -data examples/synthetic_daily.csv
+go run ./cmd/flyto2 demo
+go run ./cmd/flyto2 export public -data examples/synthetic_daily.csv -out -
+go run ./cmd/flyto2 privacy check -data examples/synthetic_daily.csv
+make web-dev
+make web-build
 ```

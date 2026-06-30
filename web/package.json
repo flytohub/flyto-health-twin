@@ -1,0 +1,24 @@
+{
+  "name": "@flytohub/flyto2-web",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "npm run check && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "check": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.node.json"
+  },
+  "dependencies": {
+    "react": "latest",
+    "react-dom": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "^26.0.1",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@vitejs/plugin-react": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  }
+}

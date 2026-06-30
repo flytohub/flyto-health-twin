@@ -57,6 +57,10 @@ type PublicEvaluation struct {
 }
 
 func BuildPublicExport(records []DailyRecord, evals []Evaluation) PublicExport {
+	return BuildPublicExportAt(records, evals, time.Now().UTC())
+}
+
+func BuildPublicExportAt(records []DailyRecord, evals []Evaluation, generatedAt time.Time) PublicExport {
 	publicRecords := make([]PublicRecordJSON, 0, len(records))
 	for _, r := range records {
 		publicRecords = append(publicRecords, toPublicRecordJSON(PublicRecord(r)))
@@ -77,8 +81,8 @@ func BuildPublicExport(records []DailyRecord, evals []Evaluation) PublicExport {
 
 	hrv, rhr, fatigue, sleep := MeanAbsoluteErrors(evals)
 	return PublicExport{
-		Project:     "flyto-health-twin",
-		GeneratedAt: time.Now().UTC().Format(time.RFC3339),
+		Project:     "flyto2",
+		GeneratedAt: generatedAt.UTC().Format(time.RFC3339),
 		Records:     publicRecords,
 		Evaluations: publicEvals,
 		ErrorSummary: ErrorSummary{
@@ -91,9 +95,13 @@ func BuildPublicExport(records []DailyRecord, evals []Evaluation) PublicExport {
 }
 
 func WritePublicExport(w io.Writer, records []DailyRecord, evals []Evaluation) error {
+	return WritePublicExportAt(w, records, evals, time.Now().UTC())
+}
+
+func WritePublicExportAt(w io.Writer, records []DailyRecord, evals []Evaluation, generatedAt time.Time) error {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
-	return enc.Encode(BuildPublicExport(records, evals))
+	return enc.Encode(BuildPublicExportAt(records, evals, generatedAt))
 }
 
 func toPublicRecordJSON(r DailyRecord) PublicRecordJSON {

@@ -10,3 +10,5 @@
   privacy header inspection, and CLI subcommands.
 - Added master plan, simulation roadmap, equipment readiness, dataset registry,
   workflow automation, and collaboration planning docs.
+- Added React Vite public dashboard, reproducible public demo export, and
+  free-hosting deployment configs for Netlify and Vercel.

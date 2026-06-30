@@ -77,8 +77,25 @@ func TestPublicExportOmitsPrivateFields(t *testing.T) {
 	if err := json.Unmarshal(buf.Bytes(), &decoded); err != nil {
 		t.Fatal(err)
 	}
-	if decoded.Project != "flyto-health-twin" || len(decoded.Evaluations) == 0 {
+	if decoded.Project != "flyto2" || len(decoded.Evaluations) == 0 {
 		t.Fatalf("unexpected export: %#v", decoded)
+	}
+}
+
+func TestPublicExportUsesProvidedGeneratedAt(t *testing.T) {
+	records := []DailyRecord{
+		{Date: day("2026-06-01"), SleepScore: 80, SleepHours: 7.5, HRV: 55, RestingHeartRate: 60, FatigueScore: 2},
+		{Date: day("2026-06-02"), SleepScore: 78, SleepHours: 7.2, HRV: 54, RestingHeartRate: 61, FatigueScore: 3},
+		{Date: day("2026-06-03"), SleepScore: 76, SleepHours: 7.0, HRV: 53, RestingHeartRate: 62, FatigueScore: 3},
+	}
+	evals, err := Evaluate(records)
+	if err != nil {
+		t.Fatal(err)
+	}
+	generatedAt := time.Date(2026, 6, 30, 0, 0, 0, 0, time.UTC)
+	export := BuildPublicExportAt(records, evals, generatedAt)
+	if export.GeneratedAt != "2026-06-30T00:00:00Z" {
+		t.Fatalf("unexpected generated_at %q", export.GeneratedAt)
 	}
 }
 
