@@ -1,0 +1,16 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+
+bin/
+dist/
+coverage.out
+.flyto-index/
+
+# Local health exports are intentionally ignored. Keep only synthetic or
+# explicitly redacted sample data under examples/.
+data/
+exports/
+*.sqlite
+*.sqlite3

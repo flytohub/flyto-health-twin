@@ -1,0 +1,73 @@
+# Data Model
+
+## Daily Record
+
+The first public data contract is one row per local calendar day.
+
+| Field | Type | Public by default | Notes |
+| --- | --- | --- | --- |
+| `date` | `YYYY-MM-DD` | yes | Daily bucket only |
+| `sleep_score` | number | yes | Aggregate score, not raw timeline |
+| `sleep_hours` | number | yes | Rounded daily value |
+| `hrv` | number | yes | Daily aggregate |
+| `resting_heart_rate` | number | yes | Daily aggregate |
+| `steps` | integer | yes | Daily count |
+| `exercise_minutes` | integer | yes | Daily aggregate |
+| `stress_score` | number | yes | Self-report or device score |
+| `fatigue_score` | number | yes | Self-report, 1 to 10 |
+| `caffeine_servings` | number | yes | Rounded count |
+| `water_liters` | number | yes | Rounded estimate |
+| `weight_kg` | number | optional | Consider private by default |
+| `blood_pressure_systolic` | integer | optional | Equipment-ready, private review first |
+| `blood_pressure_diastolic` | integer | optional | Equipment-ready, private review first |
+| `blood_glucose_mgdl` | number | optional | Equipment-ready, private review first |
+| `body_temperature_c` | number | optional | Illness/recovery context |
+| `illness_score` | number | yes | Self-report marker |
+| `training_load` | number | yes | Device or manual estimate |
+| `source_id` | string | yes | Adapter/source provenance |
+| `notes` | string | no | May contain identifying details |
+
+## Prediction Result
+
+| Field | Meaning |
+| --- | --- |
+| `target_date` | Date being predicted |
+| `predicted_hrv` | Next-day HRV prediction |
+| `predicted_resting_heart_rate` | Next-day RHR prediction |
+| `predicted_fatigue_score` | Next-day fatigue prediction |
+| `predicted_sleep_score` | Next-day sleep quality prediction |
+| `recovery_state` | `recovered`, `normal`, or `strained` |
+| `hints` | Human-readable likely error drivers |
+| `missing_variables` | Data sources that may explain error |
+| `model_id` | Stable model identifier |
+| `model_version` | Model version used for the prediction |
+| `feature_set` | Inputs the model considered |
+| `input_start_date` / `input_end_date` | Input window |
+
+## Evaluation Result
+
+| Field | Meaning |
+| --- | --- |
+| `target_date` | Actual day compared |
+| `prediction` | Prediction generated from previous data |
+| `actual` | Actual daily record |
+| `hrv_error` | Actual minus predicted |
+| `rhr_error` | Actual minus predicted |
+| `fatigue_error` | Actual minus predicted |
+| `sleep_error` | Actual minus predicted |
+
+## Future Extensions
+
+- Device-specific import metadata
+- Lab-value snapshots
+- Illness and travel markers
+- Training load
+- Feature provenance
+- Model version tracking
+
+## Public Export
+
+The public export is the dashboard-safe contract. It includes daily aggregates,
+prediction history, error summary, model metadata, and missing-variable hints.
+It does not include notes, raw GPS, exact sleep timeline, full medical reports,
+device credentials, or raw time series.

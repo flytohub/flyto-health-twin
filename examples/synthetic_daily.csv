@@ -1,0 +1,13 @@
+date,source_id,sleep_score,sleep_hours,hrv,resting_heart_rate,steps,exercise_minutes,stress_score,fatigue_score,caffeine_servings,water_liters,weight_kg,blood_pressure_systolic,blood_pressure_diastolic,blood_glucose_mgdl,body_temperature_c,illness_score,training_load,notes
+2026-06-01,synthetic_manual,78,7.4,52,61,8200,35,4,3,2,2.4,72.1,118,76,92,36.5,1,38,synthetic baseline
+2026-06-02,synthetic_manual,74,6.8,50,62,9100,45,5,4,2,2.1,72.0,119,77,96,36.6,1,45,synthetic normal day
+2026-06-03,synthetic_manual,61,5.9,47,64,11200,70,7,5,3,1.9,72.0,124,80,103,36.7,2,78,synthetic high load
+2026-06-04,synthetic_manual,68,6.4,48,63,7600,20,6,5,2,2.0,71.9,121,79,98,36.6,2,34,synthetic partial recovery
+2026-06-05,synthetic_manual,82,7.8,54,60,6400,15,3,2,1,2.6,71.8,116,74,90,36.5,1,22,synthetic recovery day
+2026-06-06,synthetic_manual,80,7.6,55,59,7000,30,3,2,1,2.5,71.8,115,73,91,36.5,1,32,synthetic stable day
+2026-06-07,synthetic_manual,58,5.4,45,66,13000,85,8,6,4,1.7,71.7,128,82,108,36.8,3,88,synthetic stress and load
+2026-06-08,synthetic_manual,64,6.1,46,65,8600,25,7,6,3,1.8,71.7,126,81,101,36.8,4,37,synthetic low recovery
+2026-06-09,synthetic_manual,76,7.0,51,62,7800,30,4,3,2,2.3,71.6,120,77,95,36.6,2,35,synthetic rebound
+2026-06-10,synthetic_manual,84,8.0,56,59,6900,20,3,2,1,2.7,71.6,115,73,89,36.5,1,24,synthetic good sleep
+2026-06-11,synthetic_manual,70,6.5,50,63,10500,60,5,4,2,2.0,71.5,122,78,99,36.6,1,65,synthetic training day
+2026-06-12,synthetic_manual,66,6.2,48,64,9800,50,6,5,3,1.9,71.5,124,80,102,36.7,2,58,synthetic moderate strain
