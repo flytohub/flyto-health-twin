@@ -152,7 +152,7 @@ plan:
   thresholds.
 - `equipment gate` blocks real-device adapters until sample exports, privacy
   mapping, fixtures, importer tests, and redaction proof exist.
-- `workflow recipes` describes Flyto-native automation using `flyto-core` and
+- `workflow recipes` describes Flyto2-native automation using `flyto-core` and
   optional `flyto-cloud` orchestration.
 - `simulate telomere` is an educational toy simulation only, separate from
   personal wearable predictions.

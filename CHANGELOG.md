@@ -12,6 +12,6 @@
   workflow automation, and collaboration planning docs.
 - Added React Vite public dashboard, reproducible public demo export, and
   free-hosting deployment configs for Netlify and Vercel.
-- Added Flyto-native workflow recipes, deterministic synthetic generator,
+- Added Flyto2-native workflow recipes, deterministic synthetic generator,
   benchmark fixture/reporting, adapter/model/dataset registries, real-equipment
   gate, and safety-scoped telomere toy simulation.

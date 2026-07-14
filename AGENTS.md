@@ -39,7 +39,7 @@ under ignored local folders such as `data/` or `exports/`.
   any command that could not run.
 - Read `PROJECT_CONTEXT.md` and the relevant `docs/` page before making
   product or model changes.
-- Keep the open-source core independent from private Flyto services.
+- Keep the open-source core independent from private Flyto2 services.
 - Prefer small Go packages with clear data contracts.
 - Keep the CLI useful and treat the web app as a public read-only dashboard.
 - Use only standard-library dependencies in the Go core until a dependency has a

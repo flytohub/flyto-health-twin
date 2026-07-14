@@ -109,7 +109,7 @@ func TestWorkflowRecipesAreFlytoNative(t *testing.T) {
 		}
 		hosted := strings.ToLower(recipe.HostedRuntime)
 		if !strings.Contains(hosted, "flyto-cloud") && !strings.Contains(hosted, "github actions") {
-			t.Fatalf("expected Flyto or CI hosted runtime: %#v", recipe)
+			t.Fatalf("expected Flyto2 or CI hosted runtime: %#v", recipe)
 		}
 	}
 }

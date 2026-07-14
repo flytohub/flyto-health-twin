@@ -307,8 +307,8 @@ function Dashboard({ data }: { data: PublicExport }) {
             detail={`${data.roadmap_status.model_card_count} model cards; benchmark ${data.benchmark.pass ? "passing" : "needs review"} on ${data.benchmark.evaluation_count} evaluations.`}
           />
           <RoadmapItem
-            title="Flyto workflows"
-            detail={`${data.roadmap_status.workflow_recipe_count} Flyto-native recipes for export, benchmark, and equipment gate checks.`}
+            title="Flyto2 workflows"
+            detail={`${data.roadmap_status.workflow_recipe_count} Flyto2-native recipes for export, benchmark, and equipment gate checks.`}
           />
           <RoadmapItem
             title="Research simulations"

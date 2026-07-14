@@ -1,4 +1,4 @@
-# Flyto-Native Workflow Automation
+# Flyto2-Native Workflow Automation
 
 Automation should help run the research loop. It must not bypass privacy
 boundaries.
@@ -14,9 +14,9 @@ boundaries.
 - Collaboration packet generation
 - Device adapter smoke test
 
-## Flyto Runtime Direction
+## Flyto2 Runtime Direction
 
-Flyto2 should use the existing Flyto stack as its native automation path:
+Flyto2 should use the existing Flyto2 stack as its native automation path:
 
 - `flyto-core` for local workflow execution, module checks, browser/YAML
   verification, and reproducible smoke tests.

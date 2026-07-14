@@ -140,7 +140,7 @@ synthetic_daily.csv
   human topics as safe simulation/research tracks.
 - `docs/equipment-readiness.md` — future device and lab adapter boundary.
 - `docs/public-dataset-registry.md` — public data sources to use later.
-- `docs/workflow-automation.md` — Flyto Core/Cloud workflow automation
+- `docs/workflow-automation.md` — Flyto2 Core/Cloud workflow automation
   boundary.
 - `docs/collaboration-plan.md` — how to approach researchers and device teams.
 - `docs/deployment.md` — free static hosting options for the React Vite
@@ -157,5 +157,5 @@ synthetic_daily.csv
 - Model report: `go run ./cmd/flyto2 report model`
 - Benchmark report: `go run ./cmd/flyto2 benchmark run`
 - Real-equipment gate: `go run ./cmd/flyto2 equipment gate`
-- Flyto-native workflow recipes: `go run ./cmd/flyto2 workflow recipes`
+- Flyto2-native workflow recipes: `go run ./cmd/flyto2 workflow recipes`
 - Safe telomere toy simulation: `go run ./cmd/flyto2 simulate telomere`

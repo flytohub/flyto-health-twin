@@ -79,7 +79,7 @@ Additional public-safe status fields:
 | `roadmap_status.adapter_contract_count` | Number of adapter contracts tracked in the private/open-core registry |
 | `roadmap_status.model_card_count` | Number of model cards tracked |
 | `roadmap_status.dataset_candidate_count` | Number of dataset tracks recorded |
-| `roadmap_status.workflow_recipe_count` | Number of Flyto-native workflow recipes |
+| `roadmap_status.workflow_recipe_count` | Number of Flyto2-native workflow recipes |
 | `roadmap_status.equipment_gates` | Source ids and gate status only; no raw field mappings |
 | `roadmap_status.simulation_boundary` | Safe simulation boundary statement |
 | `benchmark` | Synthetic model regression summary for dashboard transparency |

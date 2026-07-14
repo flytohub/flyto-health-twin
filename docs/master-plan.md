@@ -149,9 +149,9 @@ Implemented now:
 go run ./cmd/flyto2 simulate telomere -divisions 24
 ```
 
-## Phase 7: Flyto-Native Automation
+## Phase 7: Flyto2-Native Automation
 
-Use Flyto automation around privacy-safe outputs:
+Use Flyto2 automation around privacy-safe outputs:
 
 - Daily import check
 - Prediction run

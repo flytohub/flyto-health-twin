@@ -28,21 +28,21 @@ redacted or reimplemented as safe mocks:
 - Cloud sync credentials
 - Hosted dashboards with real user data
 - Advanced proprietary model weights
-- Internal Flyto entitlement or billing code
+- Internal Flyto2 entitlement or billing code
 
 ## Flytohub Relationship
 
 This project may live inside the `/Users/chester/flytohub` workspace as a
-separate git repository. It should not depend on private Flyto services at
+separate git repository. It should not depend on private Flyto2 services at
 runtime.
 
-Flyto resources may be used around the project:
+Flyto2 resources may be used around the project:
 
 - `flyto-indexer` for code review, secret scan, and architecture checks.
 - `flyto-core` for local workflow/module execution and verification demos.
 - `flyto-cloud` for optional hosted scheduling, collaboration, and public
   orchestration after privacy-safe exports exist.
-- Existing Flyto docs and gates as engineering patterns.
+- Existing Flyto2 docs and gates as engineering patterns.
 
 The open-source project must remain usable by someone who only clones this
 repository.
