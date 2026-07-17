@@ -30,7 +30,7 @@ redacted or reimplemented as safe mocks:
 - Advanced proprietary model weights
 - Internal Flyto2 entitlement or billing code
 
-## Flytohub Relationship
+## Flyto2 Workspace Relationship
 
 This project may live inside the `/Users/chester/flytohub` workspace as a
 separate git repository. It should not depend on private Flyto2 services at

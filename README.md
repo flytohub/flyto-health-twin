@@ -1,13 +1,25 @@
-# Flyto2
+# Flyto2 Health Twin
 
-Flyto2 is an open-source personal health digital twin prototype.
-It imports or simulates daily wearable and lifestyle data, predicts next-day
-physiological response metrics, compares predictions with actual outcomes, and
-reports error analysis.
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Website](https://img.shields.io/badge/website-flyto2.com-8B5CF6)](https://flyto2.com)
+[![GitHub](https://img.shields.io/badge/GitHub-flytohub%2Fflyto--health--twin-181717?logo=github)](https://github.com/flytohub/flyto-health-twin)
+
+Open-source personal health digital twin research prototype for privacy-first
+wearable data experiments. It imports or simulates daily lifestyle data,
+predicts next-day response metrics, compares predictions with actual outcomes,
+and reports transparent error analysis.
+
+Use it to study digital twin data models, synthetic health datasets, Go CLI
+pipelines, React Vite dashboards, registry-based model adapters, privacy export
+rules, and benchmarkable prediction workflows.
 
 This is not a medical product. It does not diagnose, treat, prevent disease,
 claim clinical accuracy, reverse aging, repair telomeres, or recommend medical
 interventions.
+
+Official links: [flyto2.com](https://flyto2.com) ·
+[Repository](https://github.com/flytohub/flyto-health-twin) ·
+[Security](mailto:security@flyto2.com)
 
 ## Current Scope
 
