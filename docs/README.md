@@ -2,6 +2,7 @@
 
 ## Use And Integration
 
+- [Research and safety whitepaper](WHITEPAPER.md)
 - [Feature reference](FEATURES.md)
 - [CLI commands and flags](CLI.md)
 - [Go package reference](API.md)
