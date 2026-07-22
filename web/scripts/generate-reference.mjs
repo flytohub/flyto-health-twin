@@ -83,7 +83,7 @@ function render(declarations) {
     "| --- | --- | --- | --- |",
   ];
   for (const item of declarations) {
-    lines.push(`| ${item.kind} | \`${item.symbol}\` | \`${item.source}:${item.line}\` | ${item.summary} |`);
+    lines.push(`| ${item.kind} | \`${item.symbol}\` | [\`${item.source}:${item.line}\`](../../${item.source}#L${item.line}) | ${item.summary} |`);
   }
   return `${lines.join("\n")}\n`;
 }

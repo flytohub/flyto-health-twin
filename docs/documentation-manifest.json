@@ -11,7 +11,9 @@
     "security": "SECURITY.md",
     "changelog": "CHANGELOG.md",
     "feature_reference": "docs/FEATURES.md",
-    "whitepaper": "docs/WHITEPAPER.md"
+    "whitepaper": "docs/WHITEPAPER.md",
+    "source_reference": ["docs/generated/go-symbols.md", "docs/generated/web-symbols.md"],
+    "source_reference_exclude": ["web/scripts/**", "web/vite.config.ts"]
   },
   "source_areas": [
     {

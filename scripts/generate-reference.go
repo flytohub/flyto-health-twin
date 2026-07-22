@@ -162,7 +162,17 @@ func renderReference(declarations []declaration) []byte {
 	output.WriteString("| Kind | Symbol | Source | Contract summary |\n")
 	output.WriteString("| --- | --- | --- | --- |\n")
 	for _, item := range declarations {
-		fmt.Fprintf(&output, "| %s | `%s` | `%s:%d` | %s |\n", item.Kind, item.Symbol, item.Source, item.Line, item.Summary)
+		fmt.Fprintf(
+			&output,
+			"| %s | `%s` | [`%s:%d`](../../%s#L%d) | %s |\n",
+			item.Kind,
+			item.Symbol,
+			item.Source,
+			item.Line,
+			item.Source,
+			item.Line,
+			item.Summary,
+		)
 	}
 	return []byte(output.String())
 }

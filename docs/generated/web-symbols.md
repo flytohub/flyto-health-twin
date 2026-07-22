@@ -6,29 +6,29 @@ Declarations: **26**
 
 | Kind | Symbol | Source | Contract summary |
 | --- | --- | --- | --- |
-| type | `PublicRecord` | `web/src/App.tsx:4` | Dashboard-safe daily aggregate returned by the Go public export. |
-| type | `PublicPrediction` | `web/src/App.tsx:20` | Transparent model result and provenance exposed to the dashboard. |
-| type | `PublicEvaluation` | `web/src/App.tsx:38` | One public prediction-to-actual comparison. |
-| type | `ErrorSummary` | `web/src/App.tsx:49` | Mean absolute errors for the four modeled response metrics. |
-| type | `PublicEquipmentGateStatus` | `web/src/App.tsx:57` | Redacted readiness state for one adapter source. |
-| type | `PublicRoadmapStatus` | `web/src/App.tsx:63` | Public-safe counts and equipment gate states. |
-| type | `ModelEvaluationReport` | `web/src/App.tsx:73` | Synthetic benchmark evidence displayed by the roadmap panel. |
-| type | `PublicExport` | `web/src/App.tsx:84` | Complete versioned payload consumed by the React dashboard. |
-| type | `SeriesPoint` | `web/src/App.tsx:95` | Actual and predicted values for one chart date. |
-| constant | `dataUrl` | `web/src/App.tsx:102` | Base-path-aware URL for the generated public export. |
-| constant | `logoUrl` | `web/src/App.tsx:104` | Base-path-aware URL for the Flyto2 logo. |
-| function | `App` | `web/src/App.tsx:107` | Loads the public payload and selects loading, error, or dashboard state. |
-| function | `Dashboard` | `web/src/App.tsx:148` | Renders metrics, evidence, privacy, roadmap, and evaluation surfaces. |
-| function | `StatusScreen` | `web/src/App.tsx:341` | Renders a stable full-screen loading or error state. |
-| function | `MetricCard` | `web/src/App.tsx:355` | Renders one summary metric with an optional state tone and unit. |
-| function | `PanelHeader` | `web/src/App.tsx:378` | Renders a consistent compact panel heading and metadata label. |
-| function | `LineChart` | `web/src/App.tsx:388` | Renders an accessible responsive actual-versus-predicted SVG series. |
-| function | `TagList` | `web/src/App.tsx:447` | Renders normalized feature names as compact tags. |
-| function | `TextList` | `web/src/App.tsx:458` | Renders a titled list of model assumptions or explanations. |
-| function | `BoundaryItem` | `web/src/App.tsx:472` | Renders one shown, omitted, source, or gate privacy statement. |
-| function | `RoadmapItem` | `web/src/App.tsx:482` | Renders one current roadmap capability backed by payload counts. |
-| function | `StatePill` | `web/src/App.tsx:492` | Renders a recovery-state label with its matching semantic tone. |
-| function | `formatState` | `web/src/App.tsx:497` | Converts a machine state into a readable title-cased label. |
-| function | `formatNumber` | `web/src/App.tsx:508` | Formats a metric with one decimal place. |
-| function | `formatSigned` | `web/src/App.tsx:513` | Formats a signed error value with one decimal place. |
-| function | `formatDateTime` | `web/src/App.tsx:518` | Formats an RFC 3339 generation time for the current English locale. |
+| type | `PublicRecord` | [`web/src/App.tsx:4`](../../web/src/App.tsx#L4) | Dashboard-safe daily aggregate returned by the Go public export. |
+| type | `PublicPrediction` | [`web/src/App.tsx:20`](../../web/src/App.tsx#L20) | Transparent model result and provenance exposed to the dashboard. |
+| type | `PublicEvaluation` | [`web/src/App.tsx:38`](../../web/src/App.tsx#L38) | One public prediction-to-actual comparison. |
+| type | `ErrorSummary` | [`web/src/App.tsx:49`](../../web/src/App.tsx#L49) | Mean absolute errors for the four modeled response metrics. |
+| type | `PublicEquipmentGateStatus` | [`web/src/App.tsx:57`](../../web/src/App.tsx#L57) | Redacted readiness state for one adapter source. |
+| type | `PublicRoadmapStatus` | [`web/src/App.tsx:63`](../../web/src/App.tsx#L63) | Public-safe counts and equipment gate states. |
+| type | `ModelEvaluationReport` | [`web/src/App.tsx:73`](../../web/src/App.tsx#L73) | Synthetic benchmark evidence displayed by the roadmap panel. |
+| type | `PublicExport` | [`web/src/App.tsx:84`](../../web/src/App.tsx#L84) | Complete versioned payload consumed by the React dashboard. |
+| type | `SeriesPoint` | [`web/src/App.tsx:95`](../../web/src/App.tsx#L95) | Actual and predicted values for one chart date. |
+| constant | `dataUrl` | [`web/src/App.tsx:102`](../../web/src/App.tsx#L102) | Base-path-aware URL for the generated public export. |
+| constant | `logoUrl` | [`web/src/App.tsx:104`](../../web/src/App.tsx#L104) | Base-path-aware URL for the Flyto2 logo. |
+| function | `App` | [`web/src/App.tsx:107`](../../web/src/App.tsx#L107) | Loads the public payload and selects loading, error, or dashboard state. |
+| function | `Dashboard` | [`web/src/App.tsx:148`](../../web/src/App.tsx#L148) | Renders metrics, evidence, privacy, roadmap, and evaluation surfaces. |
+| function | `StatusScreen` | [`web/src/App.tsx:341`](../../web/src/App.tsx#L341) | Renders a stable full-screen loading or error state. |
+| function | `MetricCard` | [`web/src/App.tsx:355`](../../web/src/App.tsx#L355) | Renders one summary metric with an optional state tone and unit. |
+| function | `PanelHeader` | [`web/src/App.tsx:378`](../../web/src/App.tsx#L378) | Renders a consistent compact panel heading and metadata label. |
+| function | `LineChart` | [`web/src/App.tsx:388`](../../web/src/App.tsx#L388) | Renders an accessible responsive actual-versus-predicted SVG series. |
+| function | `TagList` | [`web/src/App.tsx:447`](../../web/src/App.tsx#L447) | Renders normalized feature names as compact tags. |
+| function | `TextList` | [`web/src/App.tsx:458`](../../web/src/App.tsx#L458) | Renders a titled list of model assumptions or explanations. |
+| function | `BoundaryItem` | [`web/src/App.tsx:472`](../../web/src/App.tsx#L472) | Renders one shown, omitted, source, or gate privacy statement. |
+| function | `RoadmapItem` | [`web/src/App.tsx:482`](../../web/src/App.tsx#L482) | Renders one current roadmap capability backed by payload counts. |
+| function | `StatePill` | [`web/src/App.tsx:492`](../../web/src/App.tsx#L492) | Renders a recovery-state label with its matching semantic tone. |
+| function | `formatState` | [`web/src/App.tsx:497`](../../web/src/App.tsx#L497) | Converts a machine state into a readable title-cased label. |
+| function | `formatNumber` | [`web/src/App.tsx:508`](../../web/src/App.tsx#L508) | Formats a metric with one decimal place. |
+| function | `formatSigned` | [`web/src/App.tsx:513`](../../web/src/App.tsx#L513) | Formats a signed error value with one decimal place. |
+| function | `formatDateTime` | [`web/src/App.tsx:518`](../../web/src/App.tsx#L518) | Formats an RFC 3339 generation time for the current English locale. |
