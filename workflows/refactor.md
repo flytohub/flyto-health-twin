@@ -2,8 +2,9 @@
 
 Use this for structure changes that should preserve behavior.
 
-1. State the behavior that must not change.
-2. Identify blast radius and impacted tests.
-3. Prefer incremental changes over broad rewrites.
-4. Run relevant verification before and after.
-5. Document architecture or decision changes when the shape of the system changes.
+1. State the CLI, model, JSON, privacy, and UI behavior that must remain stable.
+2. Use Flyto2 Indexer impact results to identify all callers and references.
+3. Preserve deterministic fixtures, model versioning, strict chronology, and
+   public allowlist behavior.
+4. Regenerate references and compare benchmark/public export output.
+5. Update architecture or decisions when ownership changes.

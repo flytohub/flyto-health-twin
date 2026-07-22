@@ -1,0 +1,139 @@
+{
+  "$schema": "https://docs.flyto2.com/schemas/documentation-contract-v1.json",
+  "schema_version": 1,
+  "repository": "flyto-health-twin",
+  "status": "experimental",
+  "audiences": ["researchers", "Go contributors", "frontend contributors", "privacy reviewers"],
+  "documentation": {
+    "index": "docs/README.md",
+    "architecture": "ARCHITECTURE.md",
+    "state": "STATE.md",
+    "security": "SECURITY.md",
+    "changelog": "CHANGELOG.md",
+    "feature_reference": "docs/FEATURES.md"
+  },
+  "source_areas": [
+    {
+      "id": "cli",
+      "description": "Local Go command-line interface for imports, predictions, evaluation, exports, registries, reports, gates, and simulation.",
+      "paths": ["cmd/flyto2/**"],
+      "documentation": ["docs/CLI.md", "README.md#cli"]
+    },
+    {
+      "id": "twin-domain",
+      "description": "Internal Go domain package containing all data contracts, model logic, privacy controls, registries, fixtures, and reports.",
+      "paths": ["internal/twin/**"],
+      "documentation": ["docs/API.md", "docs/FEATURES.md", "docs/data-model.md", "docs/generated/go-symbols.md"]
+    },
+    {
+      "id": "public-dashboard",
+      "description": "Static React and Vite dashboard that renders only reproducible, privacy-filtered public export data.",
+      "paths": ["web/**", "netlify.toml", "vercel.json"],
+      "documentation": ["docs/FEATURES.md#static-dashboard", "docs/WEB_UI.md", "docs/SEO.md", "docs/deployment.md", "web/README.md", "docs/generated/web-symbols.md"]
+    },
+    {
+      "id": "research-contracts",
+      "description": "Research, privacy, dataset, equipment, simulation, workflow, collaboration, and open-source boundary documents.",
+      "paths": ["docs/**", "PROJECT_CONTEXT.md"],
+      "documentation": ["docs/README.md"]
+    },
+    {
+      "id": "verification-automation",
+      "description": "Source-comment generation, documentation drift, tests, privacy, CLI smoke, frontend build, deployment metadata, and CI gates.",
+      "paths": ["scripts/**", "web/scripts/**", "Makefile", ".github/workflows/**"],
+      "documentation": ["docs/VALIDATION.md", "scripts/README.md", "web/scripts/README.md"]
+    }
+  ],
+  "feature_surfaces": [
+    {
+      "id": "import-synthetic",
+      "title": "Daily import and synthetic fixtures",
+      "kind": "cli",
+      "status": "experimental",
+      "description": "Loads privacy-scoped daily CSV records and generates deterministic synthetic profiles for reproducible research workflows.",
+      "source": ["cmd/flyto2/main.go", "internal/twin/adapter.go", "internal/twin/csv.go", "internal/twin/synthetic.go"],
+      "documentation": ["docs/FEATURES.md#daily-aggregate-import", "docs/FEATURES.md#synthetic-data", "docs/CLI.md"],
+      "tests": ["internal/twin/roadmap_test.go"]
+    },
+    {
+      "id": "prediction-evaluation",
+      "title": "Prediction and evaluation",
+      "kind": "library",
+      "status": "experimental",
+      "description": "Runs a transparent baseline next-day predictor and rolling evaluation with model provenance, errors, hints, and assumptions.",
+      "source": ["internal/twin/model.go", "internal/twin/types.go", "internal/twin/benchmark.go"],
+      "documentation": ["docs/FEATURES.md#prediction-and-evaluation", "docs/FEATURES.md#benchmarks-and-model-reports", "docs/API.md#core-data-and-models"],
+      "tests": ["internal/twin/model_test.go", "internal/twin/roadmap_test.go"]
+    },
+    {
+      "id": "privacy-export",
+      "title": "Privacy gate and public export",
+      "kind": "operations",
+      "status": "experimental",
+      "description": "Inspects source fields, flags sensitive notes, removes private values, and creates a reproducible dashboard-safe JSON contract.",
+      "source": ["internal/twin/privacy.go", "internal/twin/export.go", "web/public/public-data.json"],
+      "documentation": ["docs/FEATURES.md#public-export-and-privacy-gate", "docs/privacy-policy.md", "docs/data-model.md#public-export"],
+      "tests": ["internal/twin/model_test.go"],
+      "verification": ["make privacy-check", "make public-export-smoke"]
+    },
+    {
+      "id": "registries-gates",
+      "title": "Capability registries and equipment gates",
+      "kind": "schema",
+      "status": "experimental",
+      "description": "Publishes explicit adapter, model, dataset, benchmark, profile, and workflow metadata while gating unavailable equipment integrations.",
+      "source": ["internal/twin/registry.go", "internal/twin/equipment.go", "internal/twin/benchmark.go", "internal/twin/workflow.go"],
+      "documentation": ["docs/FEATURES.md#registries-and-equipment-gates", "docs/equipment-readiness.md", "docs/public-dataset-registry.md"],
+      "tests": ["internal/twin/roadmap_test.go"]
+    },
+    {
+      "id": "workflow-recipes",
+      "title": "Flyto2 workflow recipes",
+      "kind": "workflow",
+      "status": "experimental",
+      "description": "Describes reusable import, privacy, evaluation, benchmark, and export orchestration steps without embedding a scheduler.",
+      "source": ["internal/twin/workflow.go", "cmd/flyto2/main.go"],
+      "documentation": ["docs/FEATURES.md#workflow-recipes", "docs/workflow-automation.md", "docs/CLI.md"]
+    },
+    {
+      "id": "telomere-toy",
+      "title": "Safety-scoped telomere toy",
+      "kind": "library",
+      "status": "experimental",
+      "description": "Provides a bounded deterministic educational simulation with an explicit non-clinical and non-predictive safety statement.",
+      "source": ["internal/twin/simulation.go", "cmd/flyto2/main.go"],
+      "documentation": ["docs/FEATURES.md#telomere-toy-simulation", "docs/simulation-roadmap.md", "docs/CLI.md"],
+      "tests": ["internal/twin/roadmap_test.go"]
+    },
+    {
+      "id": "dashboard",
+      "title": "Static public dashboard",
+      "kind": "ui",
+      "status": "experimental",
+      "description": "Renders privacy-filtered records, model evidence, roadmap readiness, and safety context as a deployable static React application.",
+      "source": ["web/src/**", "web/public/public-data.json"],
+      "documentation": ["docs/FEATURES.md#static-dashboard", "web/README.md", "docs/deployment.md"],
+      "verification": ["make web-check", "make web-build"]
+    },
+    {
+      "id": "deployment-seo",
+      "title": "Deployment-aware search metadata",
+      "kind": "configuration",
+      "status": "experimental",
+      "description": "Indexes only verified production builds and keeps canonical, social, structured, robots, and sitemap URLs aligned across supported static hosts.",
+      "source": ["web/index.html", "web/vite.config.ts", "web/public/robots.txt", "web/scripts/validate-build.mjs"],
+      "documentation": ["docs/SEO.md", "docs/deployment.md"],
+      "verification": ["npm --prefix web run build", "PUBLIC_SITE_URL=https://approved-host/ npm --prefix web run build"]
+    },
+    {
+      "id": "source-documentation",
+      "title": "Source-linked declaration documentation",
+      "kind": "operations",
+      "status": "active",
+      "description": "Requires comments and generated references for every Go type/function/method and every top-level TypeScript type/function/constant.",
+      "source": ["scripts/generate-reference.go", "web/scripts/generate-reference.mjs", "docs/generated/**"],
+      "documentation": ["docs/VALIDATION.md#documentation-drift", "docs/generated/README.md"],
+      "verification": ["make docs-check"]
+    }
+  ]
+}

@@ -29,9 +29,9 @@ body.
 
 ## Implementation Boundary
 
-The current codebase should implement level 3 first. Levels 1 and 2 may be
-added as separate educational packages later. Levels 4 and 5 wait for hardware
-or collaborators.
+The current codebase implements the level 3 daily wearable prototype and a
+separate level 1 telomere toy. Level 2 remains a future literature-parameter
+track. Levels 4 and 5 wait for hardware or collaborators.
 
 ## Implemented Toy Simulation
 

@@ -2,10 +2,11 @@ package twin
 
 import "time"
 
+// DateLayout is the canonical local-day representation used by CSV and JSON.
 const DateLayout = "2006-01-02"
 
-// DailyRecord is the first public data contract: one privacy-safe aggregate row
-// per local calendar day.
+// DailyRecord is the normalized internal aggregate for one local calendar day.
+// It may contain private optional values and must not be serialized publicly.
 type DailyRecord struct {
 	Date                   time.Time
 	SourceID               string
@@ -29,6 +30,7 @@ type DailyRecord struct {
 	Notes                  string
 }
 
+// Prediction records one transparent next-day model result and its provenance.
 type Prediction struct {
 	TargetDate                time.Time
 	ModelID                   string
@@ -46,6 +48,7 @@ type Prediction struct {
 	MissingVariables          []string
 }
 
+// Evaluation compares one prediction with the actual target-day record.
 type Evaluation struct {
 	TargetDate   time.Time
 	Prediction   Prediction
@@ -56,6 +59,7 @@ type Evaluation struct {
 	SleepError   float64
 }
 
+// ErrorSummary contains mean absolute error for each modeled response metric.
 type ErrorSummary struct {
 	HRVMeanAbsoluteError     float64 `json:"hrv_mean_absolute_error"`
 	RHRMeanAbsoluteError     float64 `json:"rhr_mean_absolute_error"`

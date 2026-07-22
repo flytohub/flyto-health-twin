@@ -2,7 +2,9 @@
 
 ## Daily Record
 
-The first public data contract is one row per local calendar day.
+The internal normalized data contract is one row per local calendar day. It can
+contain private optional values and must pass through the public projection
+before publication.
 
 | Field | Type | Public by default | Notes |
 | --- | --- | --- | --- |
@@ -21,9 +23,9 @@ The first public data contract is one row per local calendar day.
 | `blood_pressure_systolic` | integer | optional | Equipment-ready, private review first |
 | `blood_pressure_diastolic` | integer | optional | Equipment-ready, private review first |
 | `blood_glucose_mgdl` | number | optional | Equipment-ready, private review first |
-| `body_temperature_c` | number | optional | Illness/recovery context |
-| `illness_score` | number | yes | Self-report marker |
-| `training_load` | number | yes | Device or manual estimate |
+| `body_temperature_c` | number | no | Equipment-gated illness/recovery context |
+| `illness_score` | number | no | Private self-report marker used by the local model |
+| `training_load` | number | no | Private device or manual estimate used by the local model |
 | `source_id` | string | yes | Adapter/source provenance |
 | `notes` | string | no | May contain identifying details |
 
@@ -69,8 +71,9 @@ The first public data contract is one row per local calendar day.
 
 The public export is the dashboard-safe contract. It includes daily aggregates,
 prediction history, error summary, model metadata, and missing-variable hints.
-It does not include notes, raw GPS, exact sleep timeline, full medical reports,
-device credentials, or raw time series.
+It does not include notes, weight, blood pressure, blood glucose, body
+temperature, illness score, training load, raw GPS, exact sleep timeline, full
+medical reports, device credentials, or raw time series.
 
 Additional public-safe status fields:
 

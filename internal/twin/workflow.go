@@ -1,5 +1,6 @@
 package twin
 
+// WorkflowStep describes one non-executing recipe command and expected output.
 type WorkflowStep struct {
 	ID      string `json:"id"`
 	Runtime string `json:"runtime"`
@@ -7,6 +8,7 @@ type WorkflowStep struct {
 	Output  string `json:"output"`
 }
 
+// WorkflowRecipe documents orchestration metadata and its privacy boundary.
 type WorkflowRecipe struct {
 	ID              string         `json:"id"`
 	Name            string         `json:"name"`
@@ -17,6 +19,7 @@ type WorkflowRecipe struct {
 	Steps           []WorkflowStep `json:"steps"`
 }
 
+// WorkflowRecipes returns documentation-only local and hosted recipes.
 func WorkflowRecipes() []WorkflowRecipe {
 	return []WorkflowRecipe{
 		{

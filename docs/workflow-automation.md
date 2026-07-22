@@ -16,7 +16,8 @@ boundaries.
 
 ## Flyto2 Runtime Direction
 
-Flyto2 should use the existing Flyto2 stack as its native automation path:
+Flyto2 Health Twin should use the existing Flyto2 stack as its native
+automation path:
 
 - `flyto-core` for local workflow execution, module checks, browser/YAML
   verification, and reproducible smoke tests.

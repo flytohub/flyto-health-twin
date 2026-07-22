@@ -2,6 +2,7 @@ package twin
 
 import "fmt"
 
+// GateCheck records one equipment-readiness requirement and its evidence.
 type GateCheck struct {
 	ID       string `json:"id"`
 	Label    string `json:"label"`
@@ -10,6 +11,7 @@ type GateCheck struct {
 	Evidence string `json:"evidence"`
 }
 
+// EquipmentGateReport summarizes source readiness and required follow-up.
 type EquipmentGateReport struct {
 	SourceID    string      `json:"source_id"`
 	SourceName  string      `json:"source_name"`
@@ -18,6 +20,7 @@ type EquipmentGateReport struct {
 	NextActions []string    `json:"next_actions"`
 }
 
+// CheckEquipmentGate evaluates one adapter against its readiness contract.
 func CheckEquipmentGate(sourceID string) (EquipmentGateReport, error) {
 	contract, ok := FindAdapterContract(sourceID)
 	if !ok {
@@ -61,6 +64,7 @@ func CheckEquipmentGate(sourceID string) (EquipmentGateReport, error) {
 	}, nil
 }
 
+// CheckAllEquipmentGates evaluates every registered adapter contract.
 func CheckAllEquipmentGates() []EquipmentGateReport {
 	var reports []EquipmentGateReport
 	for _, contract := range AdapterContracts() {

@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// TelomereToyParams defines bounded inputs for the educational simulation.
 type TelomereToyParams struct {
 	InitialLengthKB float64 `json:"initial_length_kb"`
 	Divisions       int     `json:"divisions"`
@@ -12,12 +13,14 @@ type TelomereToyParams struct {
 	RepairBias      float64 `json:"repair_bias"`
 }
 
+// TelomereToyPoint records one sampled toy division state.
 type TelomereToyPoint struct {
 	Division int     `json:"division"`
 	LengthKB float64 `json:"length_kb"`
 	State    string  `json:"state"`
 }
 
+// TelomereToyResult contains the toy series and explicit safety boundaries.
 type TelomereToyResult struct {
 	SimulationID             string             `json:"simulation_id"`
 	Boundary                 string             `json:"boundary"`
@@ -30,6 +33,7 @@ type TelomereToyResult struct {
 	NotAllowedInterpretation []string           `json:"not_allowed_interpretation"`
 }
 
+// RunTelomereToy computes a deterministic non-clinical shortening illustration.
 func RunTelomereToy(params TelomereToyParams) (TelomereToyResult, error) {
 	if params.InitialLengthKB == 0 {
 		params.InitialLengthKB = 10
@@ -85,6 +89,7 @@ func RunTelomereToy(params TelomereToyParams) (TelomereToyResult, error) {
 	}, nil
 }
 
+// toyCellState maps illustrative lengths to explicitly toy state labels.
 func toyCellState(lengthKB float64) string {
 	switch {
 	case lengthKB <= 3:
@@ -96,6 +101,7 @@ func toyCellState(lengthKB float64) string {
 	}
 }
 
+// round2 rounds a value to two decimal places for stable output.
 func round2(v float64) float64 {
 	return math.Round(v*100) / 100
 }

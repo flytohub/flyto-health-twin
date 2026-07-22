@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
+/** Dashboard-safe daily aggregate returned by the Go public export. */
 type PublicRecord = {
   date: string;
   source_id?: string;
@@ -15,6 +16,7 @@ type PublicRecord = {
   water_liters: number;
 };
 
+/** Transparent model result and provenance exposed to the dashboard. */
 type PublicPrediction = {
   target_date: string;
   model_id: string;
@@ -32,6 +34,7 @@ type PublicPrediction = {
   missing_variables: string[];
 };
 
+/** One public prediction-to-actual comparison. */
 type PublicEvaluation = {
   target_date: string;
   prediction: PublicPrediction;
@@ -42,6 +45,7 @@ type PublicEvaluation = {
   sleep_error: number;
 };
 
+/** Mean absolute errors for the four modeled response metrics. */
 type ErrorSummary = {
   hrv_mean_absolute_error: number;
   rhr_mean_absolute_error: number;
@@ -49,11 +53,13 @@ type ErrorSummary = {
   sleep_mean_absolute_error: number;
 };
 
+/** Redacted readiness state for one adapter source. */
 type PublicEquipmentGateStatus = {
   source_id: string;
   status: string;
 };
 
+/** Public-safe counts and equipment gate states. */
 type PublicRoadmapStatus = {
   adapter_contract_count: number;
   model_card_count: number;
@@ -63,6 +69,7 @@ type PublicRoadmapStatus = {
   simulation_boundary: string;
 };
 
+/** Synthetic benchmark evidence displayed by the roadmap panel. */
 type ModelEvaluationReport = {
   dataset_id: string;
   model_id: string;
@@ -73,6 +80,7 @@ type ModelEvaluationReport = {
   pass: boolean;
 };
 
+/** Complete versioned payload consumed by the React dashboard. */
 type PublicExport = {
   project: string;
   generated_at: string;
@@ -83,15 +91,19 @@ type PublicExport = {
   benchmark: ModelEvaluationReport;
 };
 
+/** Actual and predicted values for one chart date. */
 type SeriesPoint = {
   label: string;
   actual: number;
   predicted: number;
 };
 
+/** Base-path-aware URL for the generated public export. */
 const dataUrl = `${import.meta.env.BASE_URL}public-data.json`;
+/** Base-path-aware URL for the Flyto2 logo. */
 const logoUrl = `${import.meta.env.BASE_URL}brand/flyto-logo.png`;
 
+/** Loads the public payload and selects loading, error, or dashboard state. */
 export function App() {
   const [data, setData] = useState<PublicExport | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -132,6 +144,7 @@ export function App() {
   return <Dashboard data={data} />;
 }
 
+/** Renders metrics, evidence, privacy, roadmap, and evaluation surfaces. */
 function Dashboard({ data }: { data: PublicExport }) {
   const latestEvaluation = data.evaluations.at(-1);
   const latestRecord = data.records.at(-1);
@@ -178,7 +191,7 @@ function Dashboard({ data }: { data: PublicExport }) {
             <img src={logoUrl} alt="Flyto2 logo" />
             <p className="eyebrow">Public research dashboard</p>
           </div>
-          <h1>Flyto2</h1>
+          <h1>Flyto2 Health Twin</h1>
           <p className="lede">
             Privacy-preserving daily aggregates, transparent next-day predictions, and error analysis
             for a personal health digital twin prototype.
@@ -324,6 +337,7 @@ function Dashboard({ data }: { data: PublicExport }) {
   );
 }
 
+/** Renders a stable full-screen loading or error state. */
 function StatusScreen({ title, detail }: { title: string; detail: string }) {
   return (
     <main className="status-screen">
@@ -337,6 +351,7 @@ function StatusScreen({ title, detail }: { title: string; detail: string }) {
   );
 }
 
+/** Renders one summary metric with an optional state tone and unit. */
 function MetricCard({
   label,
   value,
@@ -359,6 +374,7 @@ function MetricCard({
   );
 }
 
+/** Renders a consistent compact panel heading and metadata label. */
 function PanelHeader({ title, meta }: { title: string; meta: string }) {
   return (
     <div className="panel-header">
@@ -368,6 +384,7 @@ function PanelHeader({ title, meta }: { title: string; meta: string }) {
   );
 }
 
+/** Renders an accessible responsive actual-versus-predicted SVG series. */
 function LineChart({
   points,
   actualLabel,
@@ -379,6 +396,9 @@ function LineChart({
   predictedLabel: string;
   unit: string;
 }) {
+  if (points.length === 0) {
+    return <p className="muted">No evaluation data is available for this chart.</p>;
+  }
   const width = 720;
   const height = 260;
   const padding = 34;
@@ -423,6 +443,7 @@ function LineChart({
   );
 }
 
+/** Renders normalized feature names as compact tags. */
 function TagList({ items }: { items: string[] }) {
   return (
     <div className="tag-list">
@@ -433,6 +454,7 @@ function TagList({ items }: { items: string[] }) {
   );
 }
 
+/** Renders a titled list of model assumptions or explanations. */
 function TextList({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="text-list">
@@ -446,6 +468,7 @@ function TextList({ title, items }: { title: string; items: string[] }) {
   );
 }
 
+/** Renders one shown, omitted, source, or gate privacy statement. */
 function BoundaryItem({ label, value }: { label: string; value: string }) {
   return (
     <div className="boundary-item">
@@ -455,6 +478,7 @@ function BoundaryItem({ label, value }: { label: string; value: string }) {
   );
 }
 
+/** Renders one current roadmap capability backed by payload counts. */
 function RoadmapItem({ title, detail }: { title: string; detail: string }) {
   return (
     <article className="roadmap-item">
@@ -464,10 +488,12 @@ function RoadmapItem({ title, detail }: { title: string; detail: string }) {
   );
 }
 
+/** Renders a recovery-state label with its matching semantic tone. */
 function StatePill({ state }: { state: string }) {
   return <span className={`state-pill tone-${state}`}>{formatState(state)}</span>;
 }
 
+/** Converts a machine state into a readable title-cased label. */
 function formatState(value?: string) {
   if (!value) {
     return "Unknown";
@@ -478,14 +504,17 @@ function formatState(value?: string) {
     .join(" ");
 }
 
+/** Formats a metric with one decimal place. */
 function formatNumber(value: number) {
   return value.toFixed(1);
 }
 
+/** Formats a signed error value with one decimal place. */
 function formatSigned(value: number) {
   return `${value >= 0 ? "+" : ""}${value.toFixed(1)}`;
 }
 
+/** Formats an RFC 3339 generation time for the current English locale. */
 function formatDateTime(value: string) {
   return new Intl.DateTimeFormat("en", {
     dateStyle: "medium",

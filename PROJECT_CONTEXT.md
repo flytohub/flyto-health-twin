@@ -2,7 +2,7 @@
 
 ## Summary
 
-Flyto2 is an open-source personal health digital twin prototype.
+Flyto2 Health Twin is an open-source personal health digital twin prototype.
 The project uses wearable data, lifestyle logs, and optional periodic health
 metrics to build a low-cost personal physiological response model.
 
@@ -47,13 +47,16 @@ Initial input fields:
 - Body weight
 - Notes
 
-Optional future inputs:
+Implemented optional local/private inputs:
 
 - Blood pressure
 - Blood glucose
 - Body temperature
 - Illness marker
 - Training load
+
+Future inputs:
+
 - Lab values
 
 ## First Predictions
@@ -98,7 +101,7 @@ Open-source:
 
 - Data schemas
 - Synthetic data
-- Importers for CSV or JSON
+- Daily aggregate CSV importer
 - Daily aggregation
 - Privacy filters
 - Baseline prediction engine
@@ -119,7 +122,7 @@ Private or optional commercial layer:
 
 ## First Milestone
 
-Version 0.1 should prove a transparent local loop:
+Version 0.1 proves a transparent local loop:
 
 ```text
 synthetic_daily.csv

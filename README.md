@@ -69,9 +69,23 @@ internal/twin/         Data model, CSV import, prediction, evaluation
 examples/              Synthetic demo data only
 docs/                  Research, privacy, and data model docs
 web/                   React Vite public dashboard
+scripts/               Source-documentation generator and drift gate
 ```
 
+## Configuration
+
+The CLI requires no environment variables and makes no network requests.
+Private health inputs belong in ignored local `data/` or `exports/` paths.
+
+Static production builds may set `PUBLIC_SITE_URL` to an approved HTTPS URL.
+Cloudflare Pages, Netlify, and Vercel production environments are detected
+automatically. Builds without a verified production URL are deliberately
+`noindex` and do not publish a sitemap.
+
 ## CLI
+
+The table of every command, flag, input, output, and side effect is in the
+[CLI reference](docs/CLI.md). Common examples:
 
 ```bash
 go run ./cmd/flyto2 demo
@@ -90,6 +104,29 @@ go run ./cmd/flyto2 benchmark run -profile balanced -days 30
 go run ./cmd/flyto2 equipment gate
 go run ./cmd/flyto2 simulate telomere -divisions 24
 ```
+
+The package-level Go contract used by the CLI is documented in the
+[Go API reference](docs/API.md). `internal/twin` is intentionally not an
+external module API.
+
+## API
+
+This repository does not expose a network API. The internal Go package provides
+versioned model, adapter, registry, export, equipment-gate, workflow, and toy
+simulation contracts to the local CLI. The generated reference maps all 131 Go
+types, functions, methods, tests, and generator declarations to source comments.
+The web reference separately maps all 26 TypeScript declarations.
+
+See [Go API](docs/API.md), [CLI](docs/CLI.md), and
+[web UI](docs/WEB_UI.md).
+
+## Architecture
+
+CSV or deterministic synthetic records enter the internal Go domain package,
+pass chronology and privacy checks, feed the transparent baseline model, and
+produce an explicit public JSON allowlist. The React dashboard reads only that
+generated file. It has no backend, account, upload, or write path. See
+[ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Web Dashboard
 
@@ -127,6 +164,21 @@ make verify
 go test ./...
 go run ./cmd/flyto2 -data examples/synthetic_daily.csv -limit 7
 npm --prefix web run build
+```
+
+See the [documentation index](docs/README.md) for feature ownership, data
+contracts, privacy rules, deployment, equipment gates, and research limits.
+
+## Testing
+
+`make verify` runs formatting, vet, declaration documentation, Go tests, CLI
+build and smoke commands, privacy gates, reproducible public export, TypeScript,
+Vite production build, deployment metadata checks, and private-field checks.
+
+```bash
+make verify
+flyto-index verify . --full-scan --strict
+npm audit --prefix web --audit-level=high
 ```
 
 ## Usage

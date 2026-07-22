@@ -10,6 +10,10 @@ Before changing code or documentation:
 2. Preserve Flyto2 naming, `@flyto2.com` contact addresses, and current public URLs.
 3. Apply the Flyto2 Frontend Quality Gate to every UI change.
 4. Update memory files when behavior, deployment, public copy, or architecture changes.
+
+Use Flyto2 Indexer search, context, and impact analysis before changing source.
+After changes, run `make verify` and
+`flyto-index verify . --full-scan --strict`.
 ## Flyto2 Project Memory Contract
 
 Every Flyto2 repository must keep this project-memory scaffold current:

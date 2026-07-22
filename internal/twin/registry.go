@@ -1,5 +1,6 @@
 package twin
 
+// AdapterContract describes source fields, public eligibility, and gate checks.
 type AdapterContract struct {
 	Source               DeviceSource       `json:"source"`
 	Status               string             `json:"status"`
@@ -13,6 +14,7 @@ type AdapterContract struct {
 	Capabilities         []DeviceCapability `json:"capabilities"`
 }
 
+// ModelCard publishes versioned purpose, inputs, outputs, and limitations.
 type ModelCard struct {
 	ID             string   `json:"id"`
 	Version        string   `json:"version"`
@@ -25,6 +27,7 @@ type ModelCard struct {
 	PublicEligible bool     `json:"public_eligible"`
 }
 
+// DatasetCandidate records one reviewed or planned research data source.
 type DatasetCandidate struct {
 	ID              string   `json:"id"`
 	Name            string   `json:"name"`
@@ -36,6 +39,7 @@ type DatasetCandidate struct {
 	Status          string   `json:"status"`
 }
 
+// AdapterContracts returns implemented and explicitly gated source contracts.
 func AdapterContracts() []AdapterContract {
 	return []AdapterContract{
 		{
@@ -132,6 +136,7 @@ func AdapterContracts() []AdapterContract {
 	}
 }
 
+// FindAdapterContract performs exact source-ID lookup.
 func FindAdapterContract(id string) (AdapterContract, bool) {
 	for _, contract := range AdapterContracts() {
 		if contract.Source.ID == id {
@@ -141,6 +146,7 @@ func FindAdapterContract(id string) (AdapterContract, bool) {
 	return AdapterContract{}, false
 }
 
+// ModelRegistry returns implemented, planned, and equipment-gated model cards.
 func ModelRegistry() []ModelCard {
 	model := BaselineModel{}
 	return []ModelCard{
@@ -187,6 +193,7 @@ func ModelRegistry() []ModelCard {
 	}
 }
 
+// DatasetRegistry returns public-safe research dataset metadata.
 func DatasetRegistry() []DatasetCandidate {
 	return []DatasetCandidate{
 		{
@@ -230,6 +237,7 @@ func DatasetRegistry() []DatasetCandidate {
 	}
 }
 
+// realAdapterGateChecks returns required evidence before a real-source importer.
 func realAdapterGateChecks() []string {
 	return []string{
 		"sample export or API documentation is available",
@@ -241,6 +249,7 @@ func realAdapterGateChecks() []string {
 	}
 }
 
+// publicDailyFields returns the explicit public daily field allowlist.
 func publicDailyFields() []string {
 	return []string{
 		"date",

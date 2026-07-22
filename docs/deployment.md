@@ -26,11 +26,14 @@ The deployable output is:
 web/dist
 ```
 
+Set `PUBLIC_SITE_URL` to the approved absolute HTTPS dashboard URL when the
+hosting provider cannot expose its production URL automatically. Without a
+verified production URL the output is intentionally `noindex` and has no
+sitemap. See [the SEO contract](SEO.md).
+
 ## Free Hosting Options
 
 ### Cloudflare Pages
-
-Recommended first deploy target while GitHub Actions is blocked.
 
 Use these settings:
 
@@ -40,6 +43,9 @@ Root directory: /
 Build command: npm ci --prefix web && make web-data && npm --prefix web run build
 Build output directory: web/dist
 ```
+
+Cloudflare's `CF_PAGES_URL` is used only when `CF_PAGES_BRANCH=main`; preview
+branches remain excluded from search indexing.
 
 ### Netlify
 
@@ -63,9 +69,8 @@ Output directory: web/dist
 
 ### GitHub Pages
 
-GitHub Pages is also viable for this static Vite app, but this repository's
-current GitHub Actions runs are blocked by the account billing state. After that
-is fixed, add a Pages workflow that runs:
+GitHub Pages is also viable for this static Vite app. Set `PUBLIC_SITE_URL` to
+the final Pages URL in the deployment job, run:
 
 ```bash
 npm ci --prefix web

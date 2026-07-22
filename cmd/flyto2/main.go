@@ -12,6 +12,7 @@ import (
 	"github.com/flytohub/flyto-health-twin/internal/twin"
 )
 
+// main dispatches the local Flyto2 Health Twin command tree.
 func main() {
 	log.SetFlags(0)
 	if len(os.Args) == 1 || strings.HasPrefix(os.Args[1], "-") {
@@ -53,6 +54,7 @@ func main() {
 	}
 }
 
+// runGenerate writes deterministic synthetic CSV records.
 func runGenerate(args []string) {
 	if len(args) == 0 || args[0] != "synthetic" {
 		log.Fatalf("expected: generate synthetic\n\n%s", usageText())
@@ -79,12 +81,16 @@ func runGenerate(args []string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
 	if err := twin.WriteDailyCSV(f, records); err != nil {
+		_ = f.Close()
+		log.Fatal(err)
+	}
+	if err := f.Close(); err != nil {
 		log.Fatal(err)
 	}
 }
 
+// runEvaluate prints rolling predictions and aggregate errors.
 func runEvaluate(args []string) {
 	fs := flag.NewFlagSet("evaluate", flag.ExitOnError)
 	dataPath := fs.String("data", "examples/synthetic_daily.csv", "CSV file with daily aggregate records")
@@ -102,6 +108,7 @@ func runEvaluate(args []string) {
 	fmt.Printf("\nmean_absolute_error hrv=%.2f rhr=%.2f fatigue=%.2f sleep=%.2f\n", hrv, rhr, fatigue, sleep)
 }
 
+// runPredict writes the latest next-day prediction as JSON.
 func runPredict(args []string) {
 	fs := flag.NewFlagSet("predict", flag.ExitOnError)
 	dataPath := fs.String("data", "examples/synthetic_daily.csv", "CSV file with daily aggregate records")
@@ -121,6 +128,7 @@ func runPredict(args []string) {
 	}
 }
 
+// runExport writes the explicit public-data JSON allowlist.
 func runExport(args []string) {
 	if len(args) == 0 || args[0] != "public" {
 		log.Fatalf("expected: export public\n\n%s", usageText())
@@ -155,12 +163,16 @@ func runExport(args []string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
 	if err := twin.WritePublicExportAt(f, records, evals, exportedAt); err != nil {
+		_ = f.Close()
+		log.Fatal(err)
+	}
+	if err := f.Close(); err != nil {
 		log.Fatal(err)
 	}
 }
 
+// runRegistry writes all or one metadata registry as JSON.
 func runRegistry(args []string) {
 	if len(args) == 0 {
 		writeJSON(map[string]any{
@@ -191,6 +203,7 @@ func runRegistry(args []string) {
 	}
 }
 
+// runReport writes one baseline model evidence report.
 func runReport(args []string) {
 	if len(args) == 0 || args[0] != "model" {
 		log.Fatalf("expected: report model\n\n%s", usageText())
@@ -209,6 +222,7 @@ func runReport(args []string) {
 	writeJSONPath(*outPath, report)
 }
 
+// runBenchmark generates and evaluates a deterministic benchmark profile.
 func runBenchmark(args []string) {
 	if len(args) == 0 || args[0] != "run" {
 		log.Fatalf("expected: benchmark run\n\n%s", usageText())
@@ -231,6 +245,7 @@ func runBenchmark(args []string) {
 	writeJSONPath(*outPath, report)
 }
 
+// runEquipment writes one or all adapter readiness reports.
 func runEquipment(args []string) {
 	if len(args) == 0 || args[0] != "gate" {
 		log.Fatalf("expected: equipment gate\n\n%s", usageText())
@@ -250,6 +265,7 @@ func runEquipment(args []string) {
 	writeJSON(report)
 }
 
+// runSimulate writes the bounded educational telomere toy result.
 func runSimulate(args []string) {
 	if len(args) == 0 || args[0] != "telomere" {
 		log.Fatalf("expected: simulate telomere\n\n%s", usageText())
@@ -274,6 +290,7 @@ func runSimulate(args []string) {
 	writeJSONPath(*outPath, result)
 }
 
+// runWorkflow writes documentation-only workflow recipes.
 func runWorkflow(args []string) {
 	if len(args) == 0 || args[0] != "recipes" {
 		log.Fatalf("expected: workflow recipes\n\n%s", usageText())
@@ -281,6 +298,7 @@ func runWorkflow(args []string) {
 	writeJSON(twin.WorkflowRecipes())
 }
 
+// runImport validates CSV and prints normalized record provenance.
 func runImport(args []string) {
 	if len(args) == 0 || args[0] != "csv" {
 		log.Fatalf("expected: import csv\n\n%s", usageText())
@@ -302,6 +320,7 @@ func runImport(args []string) {
 	)
 }
 
+// runPrivacy blocks forbidden headers and reviewable note content.
 func runPrivacy(args []string) {
 	if len(args) == 0 || args[0] != "check" {
 		log.Fatalf("expected: privacy check\n\n%s", usageText())
@@ -339,6 +358,7 @@ func runPrivacy(args []string) {
 	os.Exit(1)
 }
 
+// mustLoadRecords loads a CSV path or terminates with a concise CLI error.
 func mustLoadRecords(dataPath string) []twin.DailyRecord {
 	records, err := twin.LoadCSV(dataPath)
 	if err != nil {
@@ -347,6 +367,7 @@ func mustLoadRecords(dataPath string) []twin.DailyRecord {
 	return records
 }
 
+// mustParseDate parses the canonical daily date or terminates the CLI.
 func mustParseDate(raw string) time.Time {
 	parsed, err := time.Parse(twin.DateLayout, raw)
 	if err != nil {
@@ -355,6 +376,7 @@ func mustParseDate(raw string) time.Time {
 	return parsed
 }
 
+// writeJSONPath writes indented JSON to stdout or a truncating local file.
 func writeJSONPath(path string, value any) {
 	if path == "-" {
 		writeJSON(value)
@@ -364,14 +386,18 @@ func writeJSONPath(path string, value any) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer f.Close()
 	enc := json.NewEncoder(f)
 	enc.SetIndent("", "  ")
 	if err := enc.Encode(value); err != nil {
+		_ = f.Close()
+		log.Fatal(err)
+	}
+	if err := f.Close(); err != nil {
 		log.Fatal(err)
 	}
 }
 
+// writeJSON writes indented JSON to stdout.
 func writeJSON(value any) {
 	enc := json.NewEncoder(os.Stdout)
 	enc.SetIndent("", "  ")
@@ -380,6 +406,7 @@ func writeJSON(value any) {
 	}
 }
 
+// printEvaluations renders the human-readable rolling error table.
 func printEvaluations(evals []twin.Evaluation, limit int) {
 	fmt.Println("date        model             hrv_pred hrv_actual hrv_err rhr_pred rhr_actual fatigue_pred fatigue_actual sleep_pred sleep_actual recovery hints")
 
@@ -409,10 +436,12 @@ func printEvaluations(evals []twin.Evaluation, limit int) {
 	}
 }
 
+// printUsage writes the complete command synopsis.
 func printUsage() {
 	fmt.Print(usageText())
 }
 
+// usageText returns the complete command synopsis.
 func usageText() string {
 	return `Flyto2
 

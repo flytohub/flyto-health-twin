@@ -53,6 +53,11 @@ latitude/longitude, access tokens, full medical reports, diagnosis,
 medication, exact sleep timelines, and raw heart-rate time series. Free-text
 notes are always removed from public export.
 
+The public record projection also clears weight, blood pressure, blood glucose,
+body temperature, illness score, and training load. The JSON export uses an
+explicit type that omits those keys entirely. Model `missing_variables` may name
+a signal without publishing its value.
+
 ## Medical Disclaimer
 
 This project is not a medical device and does not provide medical diagnosis,

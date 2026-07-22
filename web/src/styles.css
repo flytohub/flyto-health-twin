@@ -16,9 +16,7 @@
 body {
   margin: 0;
   min-width: 320px;
-  background:
-    linear-gradient(180deg, rgba(246, 247, 242, 0.94), rgba(246, 247, 242, 1)),
-    #f6f7f2;
+  background: #f6f7f2;
 }
 
 button,

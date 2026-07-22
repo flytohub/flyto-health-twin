@@ -1,8 +1,24 @@
-# PROJECT.md
+# Project
 
-## Project
+`flyto-health-twin` is an open-source research prototype for privacy-first,
+daily aggregate wearable experiments. It provides deterministic synthetic
+fixtures, CSV ingestion, a transparent baseline predictor, evaluation and
+benchmark reports, public-safe export, integration-readiness registries, a
+safety-scoped biology toy, and a static React dashboard.
 
-`flyto-health-twin` is part of the Flyto2 workspace. Keep this file current with the repo purpose, owned surfaces, users, and non-goals.
+## Users
+
+- Researchers evaluating transparent digital-twin data contracts.
+- Contributors experimenting with adapters, models, and reproducible fixtures.
+- Reviewers checking privacy and scientific-claim boundaries.
+
+## Non-Goals
+
+- Medical diagnosis, treatment, prevention, clinical accuracy, or personalized
+  medical advice.
+- Collection of raw wearable timelines, credentials, GPS, or medical reports.
+- Production device integrations before their equipment and privacy gates pass.
+- A hosted account, patient-record, billing, or authorization backend.
 
 ## Public Identity
 

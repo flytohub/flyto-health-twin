@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// TestAdapterRegistryIncludesImplementedCSVAndGatedRealSources checks readiness states.
 func TestAdapterRegistryIncludesImplementedCSVAndGatedRealSources(t *testing.T) {
 	csv, ok := FindAdapterContract("manual_csv")
 	if !ok {
@@ -28,6 +29,7 @@ func TestAdapterRegistryIncludesImplementedCSVAndGatedRealSources(t *testing.T) 
 	}
 }
 
+// TestSyntheticGeneratorIsDeterministicAndCSVLoadable checks fixture stability.
 func TestSyntheticGeneratorIsDeterministicAndCSVLoadable(t *testing.T) {
 	start := day("2026-06-01")
 	first, err := GenerateSyntheticRecords("balanced", start, 12)
@@ -54,6 +56,7 @@ func TestSyntheticGeneratorIsDeterministicAndCSVLoadable(t *testing.T) {
 	}
 }
 
+// TestBenchmarkReportSummarizesModelRegression checks evidence aggregation.
 func TestBenchmarkReportSummarizesModelRegression(t *testing.T) {
 	records, err := GenerateSyntheticRecords("balanced", day("2026-06-01"), 30)
 	if err != nil {
@@ -74,6 +77,7 @@ func TestBenchmarkReportSummarizesModelRegression(t *testing.T) {
 	}
 }
 
+// TestEquipmentGateAllowsCSVAndBlocksRealAdapters checks safety gates.
 func TestEquipmentGateAllowsCSVAndBlocksRealAdapters(t *testing.T) {
 	csv, err := CheckEquipmentGate("manual_csv")
 	if err != nil {
@@ -98,6 +102,7 @@ func TestEquipmentGateAllowsCSVAndBlocksRealAdapters(t *testing.T) {
 	t.Fatalf("expected at least one failed required check: %#v", wearable.Checks)
 }
 
+// TestWorkflowRecipesAreFlytoNative checks documented runtime ownership.
 func TestWorkflowRecipesAreFlytoNative(t *testing.T) {
 	recipes := WorkflowRecipes()
 	if len(recipes) == 0 {
@@ -114,6 +119,7 @@ func TestWorkflowRecipesAreFlytoNative(t *testing.T) {
 	}
 }
 
+// TestTelomereToyHasSafetyBoundary checks non-clinical output constraints.
 func TestTelomereToyHasSafetyBoundary(t *testing.T) {
 	result, err := RunTelomereToy(TelomereToyParams{
 		InitialLengthKB: 10,
@@ -135,6 +141,7 @@ func TestTelomereToyHasSafetyBoundary(t *testing.T) {
 	}
 }
 
+// TestModelAndDatasetRegistriesArePublicSafe checks registry availability.
 func TestModelAndDatasetRegistriesArePublicSafe(t *testing.T) {
 	if len(ModelRegistry()) < 2 {
 		t.Fatal("expected implemented and planned model cards")
@@ -144,6 +151,7 @@ func TestModelAndDatasetRegistriesArePublicSafe(t *testing.T) {
 	}
 }
 
+// TestGenerateSyntheticRejectsTooFewDays checks the evaluation minimum.
 func TestGenerateSyntheticRejectsTooFewDays(t *testing.T) {
 	_, err := GenerateSyntheticRecords("balanced", time.Time{}, 2)
 	if err == nil {

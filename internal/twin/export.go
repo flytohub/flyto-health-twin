@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// PublicExport is the complete dashboard-safe JSON document.
 type PublicExport struct {
 	Project       string                `json:"project"`
 	GeneratedAt   string                `json:"generated_at"`
@@ -16,6 +17,7 @@ type PublicExport struct {
 	Benchmark     ModelEvaluationReport `json:"benchmark"`
 }
 
+// PublicRoadmapStatus exposes counts and gate states without private contracts.
 type PublicRoadmapStatus struct {
 	AdapterContractCount  int                         `json:"adapter_contract_count"`
 	ModelCardCount        int                         `json:"model_card_count"`
@@ -25,11 +27,13 @@ type PublicRoadmapStatus struct {
 	SimulationBoundary    string                      `json:"simulation_boundary"`
 }
 
+// PublicEquipmentGateStatus exposes only a source identifier and readiness.
 type PublicEquipmentGateStatus struct {
 	SourceID string `json:"source_id"`
 	Status   string `json:"status"`
 }
 
+// PublicRecordJSON is the explicit allowlist of publishable daily fields.
 type PublicRecordJSON struct {
 	Date             string  `json:"date"`
 	SourceID         string  `json:"source_id,omitempty"`
@@ -45,6 +49,7 @@ type PublicRecordJSON struct {
 	WaterLiters      float64 `json:"water_liters"`
 }
 
+// PublicPrediction is the dashboard-safe model result with provenance.
 type PublicPrediction struct {
 	TargetDate                string   `json:"target_date"`
 	ModelID                   string   `json:"model_id"`
@@ -62,6 +67,7 @@ type PublicPrediction struct {
 	MissingVariables          []string `json:"missing_variables"`
 }
 
+// PublicEvaluation compares public prediction and actual allowlisted values.
 type PublicEvaluation struct {
 	TargetDate   string           `json:"target_date"`
 	Prediction   PublicPrediction `json:"prediction"`
@@ -72,10 +78,12 @@ type PublicEvaluation struct {
 	SleepError   float64          `json:"sleep_error"`
 }
 
+// BuildPublicExport creates a public document with the current UTC timestamp.
 func BuildPublicExport(records []DailyRecord, evals []Evaluation) PublicExport {
 	return BuildPublicExportAt(records, evals, time.Now().UTC())
 }
 
+// BuildPublicExportAt creates a reproducible public document at a supplied time.
 func BuildPublicExportAt(records []DailyRecord, evals []Evaluation, generatedAt time.Time) PublicExport {
 	publicRecords := make([]PublicRecordJSON, 0, len(records))
 	for _, r := range records {
@@ -127,6 +135,7 @@ func BuildPublicExportAt(records []DailyRecord, evals []Evaluation, generatedAt 
 	}
 }
 
+// publicEquipmentGateStatuses reduces detailed gate reports to public status.
 func publicEquipmentGateStatuses() []PublicEquipmentGateStatus {
 	reports := CheckAllEquipmentGates()
 	statuses := make([]PublicEquipmentGateStatus, 0, len(reports))
@@ -139,16 +148,19 @@ func publicEquipmentGateStatuses() []PublicEquipmentGateStatus {
 	return statuses
 }
 
+// WritePublicExport encodes a current-time public document as indented JSON.
 func WritePublicExport(w io.Writer, records []DailyRecord, evals []Evaluation) error {
 	return WritePublicExportAt(w, records, evals, time.Now().UTC())
 }
 
+// WritePublicExportAt encodes a reproducibly timestamped public JSON document.
 func WritePublicExportAt(w io.Writer, records []DailyRecord, evals []Evaluation, generatedAt time.Time) error {
 	enc := json.NewEncoder(w)
 	enc.SetIndent("", "  ")
 	return enc.Encode(BuildPublicExportAt(records, evals, generatedAt))
 }
 
+// toPublicRecordJSON projects a redacted record onto the public field allowlist.
 func toPublicRecordJSON(r DailyRecord) PublicRecordJSON {
 	return PublicRecordJSON{
 		Date:             r.Date.Format(DateLayout),
@@ -166,6 +178,7 @@ func toPublicRecordJSON(r DailyRecord) PublicRecordJSON {
 	}
 }
 
+// toPublicPrediction converts time fields and preserves model explanation data.
 func toPublicPrediction(p Prediction) PublicPrediction {
 	return PublicPrediction{
 		TargetDate:                p.TargetDate.Format(DateLayout),

@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// SyntheticProfile describes a deterministic privacy-safe fixture scenario.
 type SyntheticProfile struct {
 	ID             string `json:"id"`
 	Name           string `json:"name"`
@@ -19,6 +20,7 @@ type SyntheticProfile struct {
 	SourceID       string `json:"source_id"`
 }
 
+// SyntheticProfiles returns all supported fixture scenarios.
 func SyntheticProfiles() []SyntheticProfile {
 	return []SyntheticProfile{
 		{
@@ -48,6 +50,7 @@ func SyntheticProfiles() []SyntheticProfile {
 	}
 }
 
+// GenerateSyntheticRecords creates deterministic records for one profile.
 func GenerateSyntheticRecords(profileID string, start time.Time, days int) ([]DailyRecord, error) {
 	profile, ok := findSyntheticProfile(profileID)
 	if !ok {
@@ -138,6 +141,7 @@ func GenerateSyntheticRecords(profileID string, start time.Time, days int) ([]Da
 	return records, nil
 }
 
+// WriteDailyCSV serializes normalized daily records with the canonical header.
 func WriteDailyCSV(w io.Writer, records []DailyRecord) error {
 	cw := csv.NewWriter(w)
 	if err := cw.Write(dailyCSVHeader()); err != nil {
@@ -173,6 +177,7 @@ func WriteDailyCSV(w io.Writer, records []DailyRecord) error {
 	return cw.Error()
 }
 
+// dailyCSVHeader returns the ordered internal import/export column contract.
 func dailyCSVHeader() []string {
 	return []string{
 		"date",
@@ -198,6 +203,7 @@ func dailyCSVHeader() []string {
 	}
 }
 
+// findSyntheticProfile performs exact profile lookup.
 func findSyntheticProfile(id string) (SyntheticProfile, bool) {
 	for _, profile := range SyntheticProfiles() {
 		if profile.ID == id {
@@ -207,10 +213,12 @@ func findSyntheticProfile(id string) (SyntheticProfile, bool) {
 	return SyntheticProfile{}, false
 }
 
+// round1 rounds a value to one decimal place for stable fixtures.
 func round1(v float64) float64 {
 	return math.Round(v*10) / 10
 }
 
+// formatFloat emits one-decimal deterministic CSV values.
 func formatFloat(v float64) string {
 	return strconv.FormatFloat(v, 'f', 1, 64)
 }

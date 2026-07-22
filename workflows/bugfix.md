@@ -2,8 +2,9 @@
 
 Use this for defects and regressions.
 
-1. Reproduce or cite concrete evidence.
-2. Identify root cause and affected users/surfaces.
-3. Add or update the smallest useful regression check.
-4. Fix without unrelated refactors.
-5. Update `CHANGELOG.md`, `STATE.md`, or handoffs when operator-visible.
+1. Reproduce with synthetic or temporary data; never commit a real health input.
+2. Trace the defect through import, chronology, model, export allowlist, payload,
+   and dashboard as applicable.
+3. Add the smallest regression that proves the privacy or behavior boundary.
+4. Fix the owning layer without bypassing equipment gates.
+5. Run complete verification and update operator-facing documents.

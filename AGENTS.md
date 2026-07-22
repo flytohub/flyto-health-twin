@@ -34,9 +34,11 @@ under ignored local folders such as `data/` or `exports/`.
 ## Engineering Rules
 
 - Pre-change exploration is required before edits: inspect the current package,
-  tests, and relevant docs so changes follow the local shape.
+  tests, and relevant docs so changes follow the local shape. Use Flyto2
+  Indexer search, context, and impact analysis on affected symbols.
 - Post-change verification is required after edits: run `make verify` and record
-  any command that could not run.
+  any command that could not run, then run
+  `flyto-index verify . --full-scan --strict`.
 - Read `PROJECT_CONTEXT.md` and the relevant `docs/` page before making
   product or model changes.
 - Keep the open-source core independent from private Flyto2 services.
@@ -63,6 +65,7 @@ go run ./cmd/flyto2 equipment gate
 go run ./cmd/flyto2 workflow recipes
 make web-dev
 make web-build
+flyto-index verify . --full-scan --strict
 ```
 
 ## Flyto2 Project Memory Contract

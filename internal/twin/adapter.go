@@ -1,7 +1,9 @@
 package twin
 
+// DeviceCapability identifies one normalized signal an adapter can provide.
 type DeviceCapability string
 
+// Supported device capabilities used by adapter contracts and gates.
 const (
 	CapabilitySleep            DeviceCapability = "sleep"
 	CapabilityHRV              DeviceCapability = "hrv"
@@ -15,6 +17,7 @@ const (
 	CapabilityLabSnapshot      DeviceCapability = "lab_snapshot"
 )
 
+// DeviceSource describes the provenance, transport, risk, and signals of input.
 type DeviceSource struct {
 	ID           string             `json:"id"`
 	Name         string             `json:"name"`
@@ -24,13 +27,16 @@ type DeviceSource struct {
 	Capabilities []DeviceCapability `json:"capabilities"`
 }
 
+// DeviceAdapter imports one source into normalized daily records.
 type DeviceAdapter interface {
 	Source() DeviceSource
 	Import(path string) ([]DailyRecord, error)
 }
 
+// CSVAdapter implements the local manual daily-aggregate CSV source.
 type CSVAdapter struct{}
 
+// Source returns the manual CSV source contract.
 func (CSVAdapter) Source() DeviceSource {
 	return DeviceSource{
 		ID:          "manual_csv",
@@ -52,6 +58,7 @@ func (CSVAdapter) Source() DeviceSource {
 	}
 }
 
+// Import loads daily records from the supplied CSV path.
 func (CSVAdapter) Import(path string) ([]DailyRecord, error) {
 	return LoadCSV(path)
 }

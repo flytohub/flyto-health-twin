@@ -7,14 +7,22 @@ import (
 	"strings"
 )
 
-// PublicRecord removes free-text notes and keeps only daily aggregates intended
-// for examples or public dashboards.
+// PublicRecord removes private and equipment-gated values from a daily record.
+// Public JSON should still use PublicRecordJSON so private fields are omitted,
+// rather than serialized as zero values.
 func PublicRecord(r DailyRecord) DailyRecord {
 	r.Notes = ""
 	r.WeightKG = 0
+	r.BloodPressureSystolic = 0
+	r.BloodPressureDiastolic = 0
+	r.BloodGlucoseMGDL = 0
+	r.BodyTemperatureC = 0
+	r.IllnessScore = 0
+	r.TrainingLoad = 0
 	return r
 }
 
+// PrivacyIssue describes one blocked or manually reviewed source-data finding.
 type PrivacyIssue struct {
 	Field   string `json:"field"`
 	Reason  string `json:"reason"`
@@ -22,6 +30,7 @@ type PrivacyIssue struct {
 	Example string `json:"example,omitempty"`
 }
 
+// forbiddenPublicHeaders maps raw sensitive fields to operator-facing reasons.
 var forbiddenPublicHeaders = map[string]string{
 	"gps":                   "raw location is not public-safe",
 	"latitude":              "raw location is not public-safe",
@@ -38,12 +47,17 @@ var forbiddenPublicHeaders = map[string]string{
 	"heart_rate_timeseries": "raw heart-rate time series should be aggregated before publishing",
 }
 
-func InspectCSVPrivacy(path string) ([]PrivacyIssue, error) {
+// InspectCSVPrivacy blocks known raw or credential-bearing CSV headers.
+func InspectCSVPrivacy(path string) (issues []PrivacyIssue, err error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer func() {
+		if closeErr := f.Close(); err == nil && closeErr != nil {
+			err = fmt.Errorf("close CSV %q: %w", path, closeErr)
+		}
+	}()
 
 	r := csv.NewReader(f)
 	r.TrimLeadingSpace = true
@@ -52,7 +66,6 @@ func InspectCSVPrivacy(path string) ([]PrivacyIssue, error) {
 		return nil, fmt.Errorf("read header: %w", err)
 	}
 
-	var issues []PrivacyIssue
 	for _, raw := range header {
 		name := strings.ToLower(strings.TrimSpace(raw))
 		if reason, ok := forbiddenPublicHeaders[name]; ok {

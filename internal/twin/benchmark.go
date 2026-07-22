@@ -2,6 +2,7 @@ package twin
 
 import "fmt"
 
+// BenchmarkFixture defines a deterministic scenario and regression thresholds.
 type BenchmarkFixture struct {
 	ID              string       `json:"id"`
 	ProfileID       string       `json:"profile_id"`
@@ -13,6 +14,7 @@ type BenchmarkFixture struct {
 	ExpectedSignals []string     `json:"expected_signals"`
 }
 
+// ModelEvaluationReport summarizes model error and non-clinical gate results.
 type ModelEvaluationReport struct {
 	DatasetID             string         `json:"dataset_id"`
 	ModelID               string         `json:"model_id"`
@@ -27,6 +29,7 @@ type ModelEvaluationReport struct {
 	Notes                 []string       `json:"caveats"`
 }
 
+// BenchmarkFixtures returns the supported synthetic regression scenarios.
 func BenchmarkFixtures() []BenchmarkFixture {
 	return []BenchmarkFixture{
 		{
@@ -60,6 +63,7 @@ func BenchmarkFixtures() []BenchmarkFixture {
 	}
 }
 
+// BuildBenchmarkReport evaluates records against a named fixture contract.
 func BuildBenchmarkReport(profileID string, records []DailyRecord) (ModelEvaluationReport, error) {
 	fixture, ok := benchmarkFixtureForProfile(profileID)
 	if !ok {
@@ -68,6 +72,7 @@ func BuildBenchmarkReport(profileID string, records []DailyRecord) (ModelEvaluat
 	return BuildModelEvaluationReport(BaselineModel{}, records, fixture.ID)
 }
 
+// BuildModelEvaluationReport evaluates a model and summarizes its errors.
 func BuildModelEvaluationReport(model Model, records []DailyRecord, datasetID string) (ModelEvaluationReport, error) {
 	evals, err := EvaluateWithModel(model, records)
 	if err != nil {
@@ -76,6 +81,7 @@ func BuildModelEvaluationReport(model Model, records []DailyRecord, datasetID st
 	return BuildModelEvaluationReportFromEvaluations(datasetID, model.ID(), model.Version(), len(records), evals), nil
 }
 
+// BuildModelEvaluationReportFromEvaluations aggregates precomputed evaluations.
 func BuildModelEvaluationReportFromEvaluations(datasetID, modelID, modelVersion string, recordCount int, evals []Evaluation) ModelEvaluationReport {
 	hrv, rhr, fatigue, sleep := MeanAbsoluteErrors(evals)
 	report := ModelEvaluationReport{
@@ -111,6 +117,7 @@ func BuildModelEvaluationReportFromEvaluations(datasetID, modelID, modelVersion 
 	return report
 }
 
+// benchmarkFixtureForProfile performs exact synthetic-profile lookup.
 func benchmarkFixtureForProfile(profileID string) (BenchmarkFixture, bool) {
 	for _, fixture := range BenchmarkFixtures() {
 		if fixture.ProfileID == profileID {
@@ -120,6 +127,7 @@ func benchmarkFixtureForProfile(profileID string) (BenchmarkFixture, bool) {
 	return BenchmarkFixture{}, false
 }
 
+// benchmarkThresholds returns the current synthetic regression limits.
 func benchmarkThresholds() ErrorSummary {
 	return ErrorSummary{
 		HRVMeanAbsoluteError:     9,

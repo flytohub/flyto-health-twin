@@ -22,7 +22,7 @@ Each device adapter must declare:
 | Device | Expected Fields | Public Default |
 | --- | --- | --- |
 | Smartwatch / ring | HRV, heart rate, sleep, steps, activity | Daily aggregates only |
-| Blood pressure monitor | systolic, diastolic, pulse | Daily or session summary |
+| Blood pressure monitor | systolic, diastolic, pulse | Private by default; explicit review required |
 | Body scale | weight, body composition estimate | Optional, private by default |
 | Sleep monitor | sleep score, duration, stages | Aggregate only |
 | Blood glucose / CGM | glucose snapshots or curves | Private by default |

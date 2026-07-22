@@ -4,7 +4,7 @@
 
 Use this wording:
 
-> Flyto2 is an open, non-diagnostic personal physiological response
+> Flyto2 Health Twin is an open, non-diagnostic personal physiological response
 > modeling prototype. It uses wearable data, lifestyle logs, and optional
 > health metrics to predict recovery signals and identify missing variables
 > through transparent error analysis.

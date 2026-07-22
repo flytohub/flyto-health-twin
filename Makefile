@@ -1,11 +1,15 @@
-.PHONY: verify fmt-check lint test build vet privacy-check public-export-smoke roadmap-smoke fixtures web-install web-data web-check web-build web-dev web-preview demo
+.PHONY: verify fmt-check lint docs-check test build vet privacy-check public-export-smoke roadmap-smoke fixtures web-install web-data web-check web-build web-dev web-preview demo
 
 verify: fmt-check lint test build privacy-check public-export-smoke roadmap-smoke web-data web-check web-build
 
 fmt-check:
-	@test -z "$$(gofmt -l cmd internal)"
+	@test -z "$$(gofmt -l cmd internal scripts)"
 
-lint: vet
+lint: vet docs-check
+
+docs-check:
+	go run ./scripts/generate-reference.go
+	npm --prefix web run docs:check
 
 test:
 	go test ./...

@@ -1,6 +1,6 @@
-# Flyto2 Web
+# Flyto2 Health Twin Web
 
-React Vite dashboard for the public Flyto2 demo.
+React Vite dashboard for the public Flyto2 Health Twin research demo.
 
 The Flyto2 logo used by the dashboard lives at `public/brand/flyto-logo.png`.
 
@@ -25,3 +25,7 @@ make web-data
 
 The public JSON must remain redacted. Do not place raw wearable exports, account
 tokens, GPS traces, full medical reports, or private health notes in `web/public`.
+
+Production indexing requires an approved `PUBLIC_SITE_URL` or a detected
+Cloudflare Pages, Netlify, or Vercel production URL. Preview builds remain
+`noindex`. See [`docs/SEO.md`](../docs/SEO.md).

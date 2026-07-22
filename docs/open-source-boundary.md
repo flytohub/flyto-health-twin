@@ -5,7 +5,7 @@
 The public repository should contain:
 
 - Go data contracts
-- CSV and JSON importers
+- Daily aggregate CSV importer
 - Synthetic datasets
 - Privacy filters
 - Daily aggregation

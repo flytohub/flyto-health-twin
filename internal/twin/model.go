@@ -5,18 +5,22 @@ import (
 	"math"
 )
 
+// Model defines a versioned next-day prediction implementation.
 type Model interface {
 	ID() string
 	Version() string
 	Predict(history []DailyRecord) (Prediction, error)
 }
 
+// BaselineModel is the deterministic transparent strain heuristic.
 type BaselineModel struct{}
 
+// ID returns the stable baseline model identifier.
 func (BaselineModel) ID() string {
 	return "baseline_strain"
 }
 
+// Version returns the baseline model contract version.
 func (BaselineModel) Version() string {
 	return "0.1.0"
 }
@@ -27,9 +31,13 @@ func PredictNext(records []DailyRecord) (Prediction, error) {
 	return BaselineModel{}.Predict(records)
 }
 
+// Predict derives one next-day result from strictly ordered daily history.
 func (m BaselineModel) Predict(records []DailyRecord) (Prediction, error) {
 	if len(records) < 2 {
 		return Prediction{}, errors.New("at least two records are required")
+	}
+	if err := validateChronology(records); err != nil {
+		return Prediction{}, err
 	}
 
 	recent := tail(records, 3)
@@ -88,9 +96,13 @@ func Evaluate(records []DailyRecord) ([]Evaluation, error) {
 	return EvaluateWithModel(BaselineModel{}, records)
 }
 
+// EvaluateWithModel runs a supplied model over strictly ordered rolling history.
 func EvaluateWithModel(model Model, records []DailyRecord) ([]Evaluation, error) {
 	if len(records) < 3 {
 		return nil, errors.New("at least three records are required")
+	}
+	if err := validateChronology(records); err != nil {
+		return nil, err
 	}
 
 	var evaluations []Evaluation
@@ -128,6 +140,7 @@ func MeanAbsoluteErrors(evals []Evaluation) (hrv, rhr, fatigue, sleep float64) {
 	return hrv / n, rhr / n, fatigue / n, sleep / n
 }
 
+// tail returns at most the final n records without copying them.
 func tail(records []DailyRecord, n int) []DailyRecord {
 	if len(records) <= n {
 		return records
@@ -135,6 +148,7 @@ func tail(records []DailyRecord, n int) []DailyRecord {
 	return records[len(records)-n:]
 }
 
+// avg computes the mean of one projected record value.
 func avg(records []DailyRecord, value func(DailyRecord) float64) float64 {
 	if len(records) == 0 {
 		return 0
@@ -146,6 +160,7 @@ func avg(records []DailyRecord, value func(DailyRecord) float64) float64 {
 	return total / float64(len(records))
 }
 
+// clamp bounds a floating-point value to an inclusive interval.
 func clamp(v, min, max float64) float64 {
 	if v < min {
 		return min
@@ -156,6 +171,7 @@ func clamp(v, min, max float64) float64 {
 	return v
 }
 
+// recoveryState classifies a prediction as strained, recovered, or normal.
 func recoveryState(p Prediction) string {
 	if p.PredictedFatigueScore >= 6 || p.PredictedHRV < 45 || p.PredictedRestingHeartRate > 65 {
 		return "strained"
@@ -166,6 +182,7 @@ func recoveryState(p Prediction) string {
 	return "normal"
 }
 
+// explainStrain turns active heuristic conditions into human-readable hints.
 func explainStrain(last DailyRecord, strain float64) []string {
 	if strain == 0 {
 		return []string{"baseline trend; no major strain marker in current inputs"}
@@ -196,6 +213,7 @@ func explainStrain(last DailyRecord, strain float64) []string {
 	return hints
 }
 
+// missingVariableHints lists optional signals absent from the latest record.
 func missingVariableHints(last DailyRecord) []string {
 	var hints []string
 	if last.StressScore == 0 {
@@ -222,6 +240,7 @@ func missingVariableHints(last DailyRecord) []string {
 	return hints
 }
 
+// baselineFeatureSet returns the model-card input field names.
 func baselineFeatureSet() []string {
 	return []string{
 		"sleep_score",
@@ -238,10 +257,21 @@ func baselineFeatureSet() []string {
 	}
 }
 
+// baselineAssumptions returns the non-clinical heuristic assumptions.
 func baselineAssumptions() []string {
 	return []string{
 		"recent daily aggregates approximate short-term recovery trend",
 		"short sleep, high stress, high load, illness, and low hydration increase strain",
 		"model is a transparent baseline for error analysis, not clinical prediction",
 	}
+}
+
+// validateChronology requires unique records in strictly increasing date order.
+func validateChronology(records []DailyRecord) error {
+	for i := 1; i < len(records); i++ {
+		if !records[i].Date.After(records[i-1].Date) {
+			return errors.New("records must be in strictly increasing date order")
+		}
+	}
+	return nil
 }

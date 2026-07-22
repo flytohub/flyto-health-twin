@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"io"
+	"math"
 	"os"
 	"sort"
 	"strconv"
@@ -13,12 +14,16 @@ import (
 
 // LoadCSV reads daily aggregate records from a CSV file and returns them sorted
 // by date.
-func LoadCSV(path string) ([]DailyRecord, error) {
+func LoadCSV(path string) (records []DailyRecord, err error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+	defer func() {
+		if closeErr := f.Close(); err == nil && closeErr != nil {
+			err = fmt.Errorf("close CSV %q: %w", path, closeErr)
+		}
+	}()
 
 	r := csv.NewReader(f)
 	r.TrimLeadingSpace = true
@@ -30,10 +35,19 @@ func LoadCSV(path string) ([]DailyRecord, error) {
 
 	index := map[string]int{}
 	for i, name := range header {
-		index[strings.TrimSpace(name)] = i
+		normalized := strings.ToLower(strings.TrimSpace(name))
+		if normalized == "" {
+			return nil, fmt.Errorf("header column %d is empty", i+1)
+		}
+		if _, exists := index[normalized]; exists {
+			return nil, fmt.Errorf("duplicate header %q", normalized)
+		}
+		index[normalized] = i
+	}
+	if _, ok := index["date"]; !ok {
+		return nil, fmt.Errorf("required header %q is missing", "date")
 	}
 
-	var records []DailyRecord
 	for rowNum := 2; ; rowNum++ {
 		row, err := r.Read()
 		if err == io.EOF {
@@ -52,9 +66,15 @@ func LoadCSV(path string) ([]DailyRecord, error) {
 	sort.Slice(records, func(i, j int) bool {
 		return records[i].Date.Before(records[j].Date)
 	})
+	for i := 1; i < len(records); i++ {
+		if records[i].Date.Equal(records[i-1].Date) {
+			return nil, fmt.Errorf("duplicate daily record for %s", records[i].Date.Format(DateLayout))
+		}
+	}
 	return records, nil
 }
 
+// parseRow converts one indexed CSV row into the normalized daily contract.
 func parseRow(index map[string]int, row []string) (DailyRecord, error) {
 	get := func(name string) string {
 		i, ok := index[name]
@@ -68,7 +88,14 @@ func parseRow(index map[string]int, row []string) (DailyRecord, error) {
 		if raw == "" {
 			return 0, nil
 		}
-		return strconv.ParseFloat(raw, 64)
+		value, err := strconv.ParseFloat(raw, 64)
+		if err != nil {
+			return 0, err
+		}
+		if math.IsNaN(value) || math.IsInf(value, 0) {
+			return 0, fmt.Errorf("must be finite")
+		}
+		return value, nil
 	}
 	parseInt := func(name string) (int, error) {
 		raw := get(name)
