@@ -49,7 +49,7 @@ under ignored local folders such as `data/` or `exports/`.
   output.
 - Add tests for prediction, aggregation, and privacy filters.
 - Keep documentation current when the model scope or data contract changes.
-- When working inside `/Users/chester/flytohub`, use `flyto-indexer` for
+- When working inside the flytohub monorepo, use `flyto-indexer` for
   secret scans, context checks, and architecture review where useful.
 
 ## Recommended Commands
@@ -101,3 +101,20 @@ Any frontend, website, dashboard, extension webview, app screen, or generated UI
 8. Hard-to-understand content: copy must be concrete, scannable, current, and consistent with Flyto2 terminology.
 
 Frontend verification must include the relevant automated checks plus manual or screenshot review for responsive layout, accessibility states, navigation clarity, loading/empty/error states, and content readability. Public pages must preserve SEO basics: canonical URL, sitemap coverage, metadata, structured data when relevant, and no broken internal or external links.
+
+## Repo notes
+
+Merged from `CLAUDE.md` so Codex and Claude read one set of rules.
+
+Repository: `flyto-health-twin`
+
+Before changing code or documentation:
+
+1. Read `PROJECT.md`, `ARCHITECTURE.md`, `STATE.md`, and recent files in `handoffs/`.
+2. Preserve Flyto2 naming, `@flyto2.com` contact addresses, and current public URLs.
+3. Apply the Flyto2 Frontend Quality Gate to every UI change.
+4. Update memory files when behavior, deployment, public copy, or architecture changes.
+
+Use Flyto2 Indexer search, context, and impact analysis before changing source.
+After changes, run `make verify` and
+`flyto-index verify . --full-scan --strict`.
