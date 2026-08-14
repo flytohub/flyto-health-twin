@@ -7,7 +7,7 @@ checks:
     required: true
   - name: verify
     argv: [make, verify]
-    timeout_seconds: 1200
+    timeout_seconds: 900
     required: true
   - name: indexer
     argv: [flyto-index, verify, ., --full-scan, --strict]

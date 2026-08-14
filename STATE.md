@@ -6,7 +6,8 @@ Last reviewed: 2026-08-14
 
 Governed coding jobs install the pinned dashboard dependency graph, run the
 complete Go and web verification loop, and require strict Indexer validation
-through `.flyto/coding.yaml` before independent Codex audit.
+through `.flyto/coding.yaml` before independent Codex audit. The full verifier
+uses the service's bounded 900-second maximum.
 
 The deterministic CLI, internal domain package, public export, registries,
 equipment gates, simulation boundary, and static dashboard are implemented as

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Capped the governed full verifier timeout at the coding-service contract
+  maximum so preflight accepts the repository before a job is admitted.
+
 - Added a governed Flyto2 coding contract for dashboard dependency
   installation, the complete Go/web verifier, and strict Indexer validation.
 
