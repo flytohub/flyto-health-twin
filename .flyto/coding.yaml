@@ -1,0 +1,16 @@
+# Host-owned verification contract for governed Flyto2 coding jobs.
+version: flyto.coding-config.v1
+checks:
+  - name: web-install
+    argv: [npm, ci, --prefix, web, --no-audit, --no-fund]
+    timeout_seconds: 600
+    required: true
+  - name: verify
+    argv: [make, verify]
+    timeout_seconds: 1200
+    required: true
+  - name: indexer
+    argv: [flyto-index, verify, ., --full-scan, --strict]
+    timeout_seconds: 600
+    required: true
+capabilities: []

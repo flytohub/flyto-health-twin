@@ -1,8 +1,12 @@
 # STATE.md
 
-Last reviewed: 2026-07-22
+Last reviewed: 2026-08-14
 
 ## Current State
+
+Governed coding jobs install the pinned dashboard dependency graph, run the
+complete Go and web verification loop, and require strict Indexer validation
+through `.flyto/coding.yaml` before independent Codex audit.
 
 The deterministic CLI, internal domain package, public export, registries,
 equipment gates, simulation boundary, and static dashboard are implemented as

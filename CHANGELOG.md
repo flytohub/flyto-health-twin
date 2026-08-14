@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Added a governed Flyto2 coding contract for dashboard dependency
+  installation, the complete Go/web verifier, and strict Indexer validation.
+
 - Created initial Go CLI prototype.
 - Added synthetic daily aggregate data.
 - Added baseline next-day prediction and error analysis.

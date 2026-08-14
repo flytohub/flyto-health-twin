@@ -1,5 +1,15 @@
 # DECISIONS.md
 
+## 2026-08-14 - Research prototype changes use the governed coding route
+
+Decision: keep pinned dashboard installation, `make verify`, and strict
+Indexer validation in `.flyto/coding.yaml`. Public research claims and product
+copy require the same independent audit as code changes.
+
+Rationale: this prototype has unusually important medical-claim and privacy
+boundaries. A committed verification entry keeps those boundaries attached to
+every public change.
+
 ## 2026-07-16 - Adopt Flyto2 Workspace Memory Standard
 
 Decision: `flyto-health-twin` follows the Flyto2 project memory scaffold and frontend quality gate.

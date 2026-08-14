@@ -43,7 +43,7 @@
     {
       "id": "verification-automation",
       "description": "Source-comment generation, documentation drift, tests, privacy, CLI smoke, frontend build, deployment metadata, and CI gates.",
-      "paths": ["scripts/**", "web/scripts/**", "Makefile", ".github/workflows/**"],
+      "paths": ["scripts/**", "web/scripts/**", "Makefile", ".github/workflows/**", ".flyto/coding.yaml"],
       "documentation": ["docs/VALIDATION.md", "scripts/README.md", "web/scripts/README.md"]
     }
   ],
